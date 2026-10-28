@@ -1,0 +1,1770 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>Dr. Ivan Ezhov — Postdoctoral Researcher</title>
+  <meta name="description" content="Ivan Ezhov is a postdoctoral researcher at TU Munich developing biophysical modeling and machine learning methods for brain tumors, from tumor growth simulation to optical tissue analysis. Publications, teaching and awards.">
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <style>
+    :root {
+      --bg: #050506;
+      --text: #f1f1f1;
+      --muted: #a5a5a5;
+      --line: #2a2a2a;
+      --accent: #9ec5ff;
+      --accent-soft: #101820;
+      --max: 760px;
+      --hot: #ffb36b;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 17px/1.65 "Source Serif 4", Georgia, serif;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Navigation */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    nav .inner {
+      max-width: var(--max); margin: 0 auto; padding: 12px 16px;
+      display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: center;
+      font: 500 14px/1.4 Inter, system-ui, sans-serif;
+    }
+    nav .name { font-weight: 600; color: var(--text); margin-right: auto; }
+    nav a:not(.name) { color: var(--muted); }
+    nav a:hover { color: var(--accent); text-decoration: none; }
+
+    main { max-width: var(--max); margin: 0 auto; padding: 0 16px 64px; }
+    section { padding-top: 48px; scroll-margin-top: 56px; }
+    h1, h2, h3 { font-family: Inter, system-ui, sans-serif; line-height: 1.25; }
+    h2 {
+      font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); border-bottom: 1px solid var(--line);
+      padding-bottom: 8px; margin: 0 0 20px;
+    }
+    h3 { font-size: 17px; margin: 0 0 4px; }
+
+    /* About (below the hero) */
+    .about { display: flex; gap: 22px; align-items: flex-start; }
+    .about img {
+      width: 140px; height: 140px; flex: none; object-fit: cover; border-radius: 50%;
+      background: var(--accent-soft); border: 1px solid var(--line); filter: grayscale(.2);
+    }
+    .about p { margin: 0; }
+
+    /* ===== Simulation hero ===== */
+    #hero { position: relative; height: calc(100vh - 45px); min-height: 600px; overflow: hidden; cursor: crosshair; }
+    #hero #sim { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #hero .shade { position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background: linear-gradient(90deg, var(--bg) 0%, rgba(5,5,6,.75) 30%, rgba(5,5,6,0) 52%); }
+    #hero .copy { position: absolute; z-index: 2; left: 36px; top: 50%; transform: translateY(-52%);
+      max-width: 580px; pointer-events: none; }
+    #hero .kicker { font: 500 12px/1.5 "JetBrains Mono", monospace; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted); }
+    #hero h1 { font: 400 clamp(56px, 8.2vw, 120px)/.92 "Instrument Serif", Georgia, serif;
+      letter-spacing: -.015em; margin: 18px 0 22px; }
+    #hero h1 em { color: var(--hot); }
+    #hero .sub { color: #bdbab4; max-width: 440px; margin: 0 0 26px; font: 16px/1.6 Inter, system-ui, sans-serif; }
+    #hero .links { display: flex; flex-wrap: wrap; gap: 22px; margin: 0; pointer-events: auto; }
+    #hero .links a { font: 500 13px/1 "JetBrains Mono", monospace; color: var(--text);
+      padding: 0 0 4px; border: 0; border-bottom: 1px solid #555; border-radius: 0; }
+    #hero .links a:hover { color: var(--hot); border-color: var(--hot); text-decoration: none; }
+    #hero .eq { position: absolute; z-index: 2; left: 36px; bottom: 30px; pointer-events: none;
+      font: italic 24px/1.2 "Instrument Serif", Georgia, serif; color: #d8d3ca; }
+    #hero .eq small { display: block; margin-top: 8px; font: 400 10.5px/1.4 "JetBrains Mono", monospace;
+      font-style: normal; letter-spacing: .08em; color: var(--muted); }
+    #hero .eq sub { font-size: .75em; }
+    #hero .readout { position: absolute; z-index: 2; right: 36px; bottom: 30px; text-align: right; pointer-events: none;
+      font: 400 11px/1.8 "JetBrains Mono", monospace; letter-spacing: .06em; color: var(--muted); }
+    #hero .readout b { color: var(--text); font-weight: 500; }
+    #hero #r-c { color: var(--hot); }
+    @media (max-width: 760px) {
+      #hero .shade { background: linear-gradient(0deg, var(--bg) 0%, rgba(5,5,6,.85) 38%, rgba(5,5,6,0) 60%); }
+      #hero .copy { left: 20px; right: 20px; top: auto; bottom: 110px; transform: none; }
+      #hero h1 { font-size: 54px; margin: 10px 0 14px; }
+      #hero .sub { font-size: 15px; margin-bottom: 18px; }
+      #hero .eq { left: 20px; bottom: 22px; font-size: 18px; }
+      #hero .readout { display: none; }
+    }
+
+    .links {
+      display: flex; flex-wrap: wrap; gap: 0 16px; margin-top: 16px;
+      font: 500 12px/1.5 "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .links a {
+      padding: 0; border: 0; border-radius: 0; color: var(--muted); background: transparent;
+    }
+    .links a:hover { color: var(--accent); text-decoration: underline; }
+    .notice {
+      font: 500 14px/1.5 Inter, system-ui, sans-serif;
+      background: var(--accent-soft); border-left: 3px solid var(--accent);
+      padding: 10px 14px; border-radius: 4px; margin-top: 20px;
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 24px 0 8px;
+    }
+    .visual-card {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0b0b0b;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .visual-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+    .visual-card img {
+      display: block;
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      background: #000;
+    }
+    .visual-card span {
+      display: block;
+      padding: 10px 12px;
+      font: 500 12px/1.4 Inter, system-ui, sans-serif;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .visual-caption {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font: 500 14px/1.6 Inter, system-ui, sans-serif;
+    }
+
+    /* Research */
+    .project { margin-bottom: 28px; }
+    .project p { margin: 0; }
+
+    /* Publications */
+    .pubs { list-style: none; padding: 0; margin: 0; }
+    .pub-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 20px;
+      align-items: start;
+      margin-bottom: 28px;
+      padding-top: 10px;
+    }
+    .pub-thumb-link {
+      display: inline-block;
+      text-decoration: none;
+      cursor: zoom-in;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .pub-thumb {
+      width: 170px;
+      height: 220px;
+      object-fit: cover;
+      background: #000;
+      padding: 0;
+      border-radius: 8px;
+      border: none;
+      display: block;
+      box-shadow: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      image-rendering: auto;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    .pub-thumb.landscape {
+      width: 220px;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+    }
+    .pub-thumb-link:hover .pub-thumb {
+      transform: scale(1.03);
+    }
+    /* Placeholder for papers without a figure yet: replace with an <a class="pub-thumb-link"> block */
+    .pub-thumb-placeholder {
+      width: 220px;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #0b0b0c;
+      font: 600 15px/1.3 Inter, system-ui, sans-serif;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+    .pub-meta { min-width: 0; }
+    .pub-meta .authors,
+    .pub-meta .title,
+    .pub-meta .venue,
+    .pub-meta .links {
+      display: block;
+    }
+    .pub-meta .title { font-weight: 600; margin-top: 6px; }
+    .pub-meta .venue { font-style: italic; color: var(--muted); margin-top: 2px; }
+    .me { text-decoration: underline; text-underline-offset: 3px; }
+    .tags { display: block; font: 500 12px/1 Inter, system-ui, sans-serif; margin-top: 8px; }
+    .tags a {
+      display: inline-block; padding: 0; border: 0; border-radius: 0; margin: 4px 10px 0 0;
+      font: 500 11px/1.4 "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+    }
+    .tags a:hover { text-decoration: underline; }
+    h3.year { font-size: 14px; color: var(--muted); margin: 24px 0 10px; }
+
+    /* Teaching */
+    .teach { list-style: none; padding: 0; margin: 0 0 8px; }
+    .teach li { margin-bottom: 16px; }
+    .teach .when { float: right; font: 500 14px/1.65 Inter, system-ui, sans-serif; color: var(--muted); }
+    .teach .desc { display: block; color: var(--muted); font-size: 15px; }
+    h3.sub { font-size: 14px; color: var(--muted); margin: 28px 0 12px; }
+    .stats-inline {
+      margin: 0 0 12px; color: var(--muted);
+      font: 500 14px/1.7 "JetBrains Mono", monospace; letter-spacing: .01em;
+    }
+    .stats-inline .mono { color: var(--text); }
+    .awards { list-style: none; padding: 0; margin: 0; }
+    .awards li { margin-bottom: 8px; }
+
+    /* News */
+    .news { list-style: none; padding: 0; margin: 0; }
+    .news li { display: grid; grid-template-columns: 90px 1fr; gap: 12px; margin-bottom: 10px; }
+    .news time { font: 500 14px/1.65 Inter, system-ui, sans-serif; color: var(--muted); }
+
+    /* ===== Optics bookend (hyperspectral imaging) ===== */
+    #optics {
+      border-top: 1px solid var(--line);
+      padding: 88px 36px 72px;
+      display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 56px; align-items: center;
+      scroll-margin-top: 56px;
+    }
+    .op-figure { min-width: 0; }
+    .op-stage { position: relative; width: min(100%, 680px); aspect-ratio: 1; cursor: crosshair; touch-action: pan-y; }
+    #hsi { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .op-tag {
+      position: absolute; pointer-events: none;
+      font: 400 10.5px/1.4 "JetBrains Mono", monospace; letter-spacing: .08em; color: var(--muted);
+    }
+    .op-tag.tl { top: 0; left: 0; }
+    .op-tag.tr { top: 0; right: 0; color: var(--text); }
+    .op-tag.bl { bottom: 0; left: 0; color: var(--hot); }
+    .op-legend {
+      position: absolute; right: 0; bottom: 0; display: flex; align-items: center; gap: 8px; opacity: 0; pointer-events: none;
+      font: 400 10.5px/1 "JetBrains Mono", monospace; color: var(--muted);
+    }
+    .op-legend i { width: 90px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, #1e32aa 0%, #783cc8 35%, #f03c46 70%, #ffbe5a 100%); }
+    .op-controls { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; margin-top: 18px; width: min(100%, 680px); }
+    .op-tabs { display: flex; gap: 2px; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+    .op-tabs button {
+      font: 500 11px/1 "JetBrains Mono", monospace; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--muted); background: none; border: 0; border-radius: 999px; padding: 7px 11px; cursor: pointer;
+    }
+    .op-tabs button:hover { color: var(--text); }
+    .op-tabs button[aria-pressed="true"] { background: #1c1c20; color: var(--text); }
+    .op-slider { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 220px; font: 500 12px/1 "JetBrains Mono", monospace; color: var(--muted); }
+    .op-slider output { min-width: 52px; text-align: right; color: var(--text); }
+    .op-slider input { flex: 1; -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px; margin: 0;
+      background: linear-gradient(90deg, #3346ff 0%, #00c2ff 8%, #2fe05a 14%, #f2ee3a 24%, #ff9a2a 30%, #ff2a2a 40%, #8a1424 50%, #3a2a31 100%); }
+    .op-slider input::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 0; cursor: pointer; }
+    .op-slider input::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 0; cursor: pointer; }
+
+    .op-copy { min-width: 0; max-width: 560px; }
+    .op-kicker { font: 500 12px/1.5 "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    #optics h2 {
+      font: 400 clamp(44px, 5.6vw, 88px)/.95 "Instrument Serif", Georgia, serif; letter-spacing: -.01em;
+      text-transform: none; color: var(--text); border: 0; padding: 0; margin: 16px 0 20px;
+    }
+    #optics h2 em {
+      padding-right: .08em;
+      background: linear-gradient(90deg, #7a6bff, #2fb8ff 30%, #3fe08a 55%, #ffd23f 78%, #ff6a3d);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .op-sub { font: 16px/1.6 Inter, system-ui, sans-serif; color: #bdbab4; margin: 0 0 26px; }
+    #spec { width: 100%; height: 180px; display: block; }
+    .op-readout { margin-top: 14px; font: 400 11px/1.6 "JetBrains Mono", monospace; color: var(--muted); }
+    .op-readout b { color: var(--text); font-weight: 500; }
+    .op-bars { display: grid; grid-template-columns: 52px 1fr; gap: 6px 12px; align-items: center; margin-top: 10px; }
+    .op-bar { display: contents; }
+    .op-bar span { font: 400 11px/1 "JetBrains Mono", monospace; color: var(--muted); }
+    .op-bar i { height: 6px; background: #141417; border-radius: 3px; overflow: hidden; }
+    .op-bar b { display: block; height: 100%; width: 0; border-radius: 3px; transition: width .25s ease; }
+    .op-bar[data-k="o2"] b { background: #ff5a4e; }
+    .op-bar[data-k="hb"] b { background: #6b7dff; }
+    .op-bar[data-k="w"]  b { background: #3fc6ff; }
+    .op-bar[data-k="l"]  b { background: #ffd25a; }
+    .op-links { display: flex; flex-wrap: wrap; gap: 12px 22px; margin-top: 26px; }
+    .op-links a { font: 500 12.5px/1 "JetBrains Mono", monospace; color: var(--text); padding-bottom: 4px; border-bottom: 1px solid #555; }
+    .op-links a:hover { color: var(--hot); border-color: var(--hot); text-decoration: none; }
+    .op-eq { margin-top: 30px; font: italic 22px/1.2 "Instrument Serif", Georgia, serif; color: #d8d3ca; }
+    .op-eq sub { font-size: .7em; }
+    .op-eq small { display: block; margin-top: 8px; font: 400 10.5px/1.5 "JetBrains Mono", monospace; font-style: normal; letter-spacing: .06em; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      #optics { grid-template-columns: 1fr; padding: 64px 20px 48px; gap: 32px; }
+      .op-copy { max-width: none; }
+      .op-tag.tl { display: none; }
+    }
+
+    footer {
+      max-width: var(--max); margin: 0 auto; padding: 24px 16px 40px;
+      border-top: 1px solid var(--line);
+      font: 13px/1.5 Inter, system-ui, sans-serif; color: var(--muted);
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .footer-links { display: flex; gap: 14px; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); }
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      body { font-size: 16px; }
+      .about { flex-direction: column; gap: 14px; }
+      .about img { width: 80px; height: 80px; }
+      .pub-item { grid-template-columns: 1fr; gap: 10px; }
+      .pub-thumb { width: 170px; height: 220px; }
+      .pub-thumb.landscape { width: 100%; max-width: 360px; height: auto; }
+      .pub-thumb-placeholder { width: 100%; max-width: 360px; }
+      .visual-grid { grid-template-columns: 1fr; }
+      .visual-card img { height: 220px; }
+      .news li { grid-template-columns: 1fr; gap: 0; }
+      .teach .when { float: none; display: block; }
+      .legal-grid { grid-template-columns: 1fr; }
+      footer { display: block; }
+      .footer-links { margin-top: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a class="name" href="#hero">Ivan Ezhov</a>
+    <a href="#about">About</a>
+    <a href="#publications">Publications</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#awards">Awards</a>
+    <a href="#news">News</a>
+  </div>
+</nav>
+
+<header id="hero">
+  <canvas id="sim" aria-hidden="true"></canvas>
+  <div class="shade"></div>
+
+  <div class="copy">
+    <div class="kicker">Postdoctoral Researcher · TU Munich</div>
+    <h1>I study <em>brain</em><br>diseases...</h1>
+    <!-- <p class="sub">Biophysical models, inverse problems and machine learning: from simulating how a tumor grows in a patient's brain to reading tissue with light during surgery.</p> -->
+    <div class="links">
+      <a href="#publications">Publications</a>
+      <a href="https://scholar.google.de/citations?user=-Ur4MZYAAAAJ&hl=de">Google Scholar</a>
+      <a href="mailto:ivan.ezhov@tum.de">Email</a>
+    </div>
+  </div>
+
+  <div class="eq">
+    ∂<i>u</i>/∂<i>t</i> = ∇·(<i>D</i>∇<i>u</i>) + ρ<i>u</i>(1 − <i>u</i>)
+    <small>FISHER–KPP EQUATION</small>
+  </div>
+
+  <div class="readout">
+    <div>MRI · SIMULATED · <b id="r-t">t = 0 d</b></div>
+    <div>tumor volume · <b id="r-v">0.0%</b></div>
+    <div id="r-c">click inside the brain to seed a tumor</div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about">
+    <h2>About</h2>
+    <div class="about">
+      <img src="ivan.jpg" alt="Portrait of Ivan Ezhov">
+      <p>
+        I am a postdoctoral researcher at the Chair for AI in Healthcare and Medicine, Technical University of Munich.
+        My work combines biophysical modeling, inverse problems, and machine learning, from patient-specific simulations of tumor growth to real-time analysis of brain tissue with optical imaging.
+        Ultimately, my research aims to personalize radiotherapy planning and neurosurgery.
+        Before my postdoc with <a href="https://scholar.google.de/citations?user=H0O0WnQAAAAJ&hl=de">Prof. Daniel Rueckert</a>, I completed
+        my PhD (summa cum laude) at TUM with <a href="https://scholar.google.de/citations?user=Kv2QrQgAAAAJ&hl=de">Prof. Bjoern Menze</a>.
+      </p>
+    </div>
+  </section>
+
+
+
+  <!-- ================= PUBLICATIONS ================= -->
+  <section id="publications">
+    <h2>Publications</h2>
+    <p>For an always up-to-date list, please visit my <a href="https://scholar.google.de/citations?user=-Ur4MZYAAAAJ&hl=de">Google Scholar</a> page. <br>* denotes equal contribution</p>
+
+    <h3 class="year">2026</h3>
+    <ul class="pubs">
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="predictgbm.jpg" data-lightbox="publication">
+          <img class="pub-thumb landscape" src="predictgbm.jpg" alt="PREDICT-GBM overview figure for personalized glioblastoma radiotherapy planning">
+        </a>
+        <div class="pub-meta">
+          <span class="authors">Zimmer, L., Weidner, J., Balcerak, M., Kofler, F., Krupa, M., <span class="me">Ezhov, I.</span>, …, Wiestler, B.</span>
+          <span class="title">PREDICT-GBM: A multi-center platform to advance personalized glioblastoma radiotherapy planning</span>
+          <span class="venue">npj Digital Medicine, 2026.</span>
+          <span class="tags"><a href="https://www.nature.com/articles/s41746-026-03194-0">Paper</a></span>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="jonas_midl.jpg" data-lightbox="publication">
+          <img class="pub-thumb landscape" src="jonas_midl.jpg" alt="Figure for Jonas Weidner's MIDL 2026 paper on differentiable neural surrogates for brain tumor growth inversion">
+        </a>
+        <div class="pub-meta">
+          <span class="authors">Weidner, J., Zimmer, L., <span class="me">Ezhov, I.</span>, Balcerak, M., Menze, B., Rueckert, D., Wiestler, B.</span>
+          <span class="title">Brain tumor growth inversion via differentiable neural surrogates</span>
+          <span class="venue">Medical Imaging with Deep Learning (MIDL), 2026.</span>
+          <span class="tags"><a href="https://proceedings.mlr.press/v315/weidner26a.html">Paper</a></span>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="kevin.png" data-lightbox="publication">
+          <img class="pub-thumb landscape" src="kevin.png" alt="Overview figure of wavelength selection strategies for diffuse spectroscopy">
+        </a>
+        <div class="pub-meta">
+          <span class="authors">Scibilia, K., Rosier, M., Giannoni, L., Ricci, P., Lange, F., Pavone, F. S., …, <span class="me">Ezhov, I.</span></span>
+          <span class="title">A unified perspective on wavelength selection for molecular composition inference from diffuse spectroscopy</span>
+          <span class="venue">Preprint, arXiv:2606.23223, 2026.</span>
+          <span class="tags"><a href="https://arxiv.org/abs/2606.23223">arXiv</a></span>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="year">2025</h3>
+    <ul class="pubs">
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="gliodil.jpg" data-lightbox="publication">
+          <img class="pub-thumb landscape" src="gliodil.jpg" alt="Nature Communications figure for individualized glioma radiotherapy planning">
+        </a>
+        <div class="pub-meta">
+          <span class="authors">Balcerak, M., Weidner, J., Karnakov, P., <span class="me">Ezhov, I.</span>, Litvinov, S., Koumoutsakos, P., …, Menze, B.</span>
+          <span class="title">Individualizing glioma radiotherapy planning by optimization of a data and physics-informed discrete loss</span>
+          <span class="venue">Nature Communications, 2025.</span>
+          <span class="tags"><a href="https://doi.org/10.1038/s41467-025-60366-4">Paper</a></span>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="mach.png" data-lightbox="publication">
+          <img class="pub-thumb landscape" src="mach.png" alt="Domain adaptation pipeline for hyperspectral brain image segmentation">
+        </a>
+        <div class="pub-meta">
+          <span class="authors">Mach, T., Rueckert, D., Berger, A. H., Lux, L., <span class="me">Ezhov, I.</span></span>
+          <span class="title">Addressing annotation scarcity in hyperspectral brain image segmentation with unsupervised domain adaptation</span>
+          <span class="venue">International Symposium on Biomedical Image Processing and Analysis (SIPAIM), 2025.</span>
+          <span class="tags"><a href="https://ieeexplore.ieee.org/document/11283255">Paper</a></span>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="cmmca.jpg" data-lightbox="publication">
+          <img class="pub-thumb" src="cmmca.jpg" alt="Spectral unmixing of in-vivo hyperspectral brain images">
+        </a>
+        <div class="pub-meta">
+          <span class="authors">Hartenberger, M., …, Tachtsidis, I., Rueckert, D., <span class="me">Ezhov, I.</span></span>
+          <span class="title">Redefining spectral unmixing for in-vivo brain tissue analysis from hyperspectral imaging</span>
+          <span class="venue">International Workshop on Computational Mathematics Modeling in Cancer Analysis (CMMCA), 2025.</span>
+          <span class="tags"><a href="https://link.springer.com/chapter/10.1007/978-3-032-06624-4_5">Paper</a></span>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="year">2024</h3>
+    <ul class="pubs">
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="michal_neurips.jpg" data-lightbox="publication">
+          <img class="pub-thumb landscape" src="michal_neurips.jpg" alt="NeurIPS figure for physics-regularized multi-modal image assimilation for brain tumor localization">
+        </a>
+        <div class="pub-meta">
+          <span class="authors">Balcerak, M., Amiranashvili, T., Wagner, A., Weidner, J., Karnakov, P., Paetzold, J. C., <span class="me">Ezhov, I.</span>, …, Menze, B.</span>
+          <span class="title">Physics-regularized multi-modal image assimilation for brain tumor localization</span>
+          <span class="venue">Advances in Neural Information Processing Systems (NeurIPS), 2024.</span>
+          <span class="tags"><a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/49fb58cfd482a33619d48a5c5910cf3c-Abstract.html">Paper</a></span>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="jonas_tmi.jpg" data-lightbox="publication">
+          <img class="pub-thumb landscape" src="jonas_tmi.jpg" alt="Illustration of learnable priors improving inverse tumor growth modeling">
+        </a>
+        <div class="pub-meta">
+          <span class="authors">Weidner, J., <span class="me">Ezhov, I.</span>, Balcerak, M., Metz, M.C., Litvinov, S., Kaltenbach, S., Feiner, L., Lux, L., Kofler, F., Lipkova, J., Latz, J., Rueckert, D., Menze, B., Wiestler, B.</span>
+          <span class="title">A learnable prior improves inverse tumor growth modeling</span>
+          <span class="venue">IEEE Transactions on Medical Imaging, 2024.</span>
+          <span class="tags"><a href="https://ieeexplore.ieee.org/abstract/document/10748406">Paper</a></span>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="jbo.jpg" data-lightbox="publication">
+          <img class="pub-thumb landscape" src="jbo.jpg" alt="Learnable inference of molecular composition from diffuse spectroscopy of brain tissue">
+        </a>
+        <div class="pub-meta">
+          <span class="authors"><span class="me">Ezhov, I.</span>, Scibilia, K., Giannoni, L., Kofler, F., Iliash, I., Hsieh, F., …, Rueckert, D.</span>
+          <span class="title">Learnable real-time inference of molecular composition from diffuse spectroscopy of brain tissue</span>
+          <span class="venue">Journal of Biomedical Optics, 2024.</span>
+          <span class="tags"><a href="https://pubmed.ncbi.nlm.nih.gov/39318967/">PubMed</a></span>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="year">2023</h3>
+    <ul class="pubs">
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="ECBO2023.jpg" data-lightbox="publication">
+          <img class="pub-thumb" src="ECBO2023.jpg" alt="Chromophore fingerprints of brain tumor tissue from hyperspectral imaging">
+        </a>
+        <div class="pub-meta">
+          <span class="authors"><span class="me">Ezhov, I.</span>, Giannoni, L., Shit, S., Lange, F., Kofler, F., Menze, B., …, Rueckert, D.</span>
+          <span class="title">Identifying chromophore fingerprints of brain tumor tissue on hyperspectral imaging using principal component analysis</span>
+          <span class="venue">European Conference on Biomedical Optics (ECBO), 2023.</span>
+          <span class="tags"><a href="https://opg.optica.org/abstract.cfm?uri=ECBO-2023-1262826">Paper</a></span>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="metz.png" data-lightbox="publication">
+          <img class="pub-thumb" src="metz.png" alt="Multivariable comparison analysis of the tumor growth model">
+        </a>
+        <div class="pub-meta">
+          <span class="authors">Metz, M. C.*, <span class="me">Ezhov, I.</span>*, Peeken, J. C., Buchner, J. A., Lipkova, J., Kofler, F., …, Wiestler, B.</span>
+          <span class="title">Toward image-based personalization of glioblastoma therapy: A clinical and biological validation study of a novel, deep learning-driven tumor growth model</span>
+          <span class="venue">Neuro-Oncology Advances, 2023.</span>
+          <span class="tags"><a href="https://academic.oup.com/noa/article/6/1/vdad171/7502543">Paper</a></span>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="lmi.jpg" data-lightbox="publication">
+          <img class="pub-thumb landscape" src="lmi.jpg" alt="Learn-Morph-Infer pipeline for brain tumor model inversion">
+        </a>
+        <div class="pub-meta">
+          <span class="authors"><span class="me">Ezhov, I.</span>, Scibilia, K., Franitza, K., Steinbauer, F., Shit, S., Zimmer, L., …, Menze, B.</span>
+          <span class="title">Learn-Morph-Infer: A new way of solving the inverse problem for brain tumor modeling</span>
+          <span class="venue">Medical Image Analysis, 2023.</span>
+          <span class="tags"><a href="https://www.sciencedirect.com/science/article/abs/pii/S1361841522003000">Paper</a></span>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="year">2022</h3>
+    <ul class="pubs">
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="For-loop.jpg" data-lightbox="publication">
+          <img class="pub-thumb" src="For-loop.jpg" alt="For-loop inversion approach for personalized tumor growth modeling">
+        </a>
+        <div class="pub-meta">
+          <span class="authors"><span class="me">Ezhov, I.</span>, Rosier, M., Zimmer, L., Kofler, F., Shit, S., Paetzold, J. C., …, Menze, B.</span>
+          <span class="title">A for-loop is all you need. For solving the inverse problem in the case of personalized tumor growth modeling</span>
+          <span class="venue">Proceedings of Machine Learning Research (PMLR), 2022.</span>
+          <span class="tags"><a href="https://proceedings.mlr.press/v193/ezhov22a.html">Paper</a></span>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="year">2021</h3>
+    <ul class="pubs">
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="tmi.jpg" data-lightbox="publication">
+          <img class="pub-thumb landscape" src="tmi.jpg" alt="Geometry-aware neural solver for Bayesian calibration of brain tumor models">
+        </a>
+        <div class="pub-meta">
+          <span class="authors"><span class="me">Ezhov, I.</span>, Mot, T., Shit, S., Lipkova, J., Paetzold, J. C., Kofler, F., …, Menze, B.</span>
+          <span class="title">Geometry-aware neural solver for fast Bayesian calibration of brain tumor models</span>
+          <span class="venue">IEEE Transactions on Medical Imaging, 2021.</span>
+          <span class="tags"><a href="https://ieeexplore.ieee.org/document/9656125">Paper</a></span>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="year">2020</h3>
+    <ul class="pubs">
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="spade-generator.png" data-lightbox="publication">
+          <img class="pub-thumb landscape" src="spade-generator.png" alt="Conditioned generator architecture of Red-GAN">
+        </a>
+        <div class="pub-meta">
+          <span class="authors">Qasim, A.*, <span class="me">Ezhov, I.</span>*, Shit, S., Schoppe, O., Paetzold, J. C., Sekuboyina, A., …, Menze, B.</span>
+          <span class="title">Red-GAN: Attacking class imbalance via conditioned generation. Yet another medical imaging perspective</span>
+          <span class="venue">Medical Imaging with Deep Learning (MIDL), 2020.</span>
+          <span class="tags"><a href="https://proceedings.mlr.press/v121/qasim20a.html">Paper</a></span>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="year">2019</h3>
+    <ul class="pubs">
+      <li class="pub-item">
+        <a class="pub-thumb-link" href="PosterMICCAI2019.jpg" data-lightbox="publication">
+          <img class="pub-thumb" src="PosterMICCAI2019.jpg" alt="MICCAI 2019 poster on neural parameter estimation for tumor growth models">
+        </a>
+        <div class="pub-meta">
+          <span class="authors"><span class="me">Ezhov, I.</span>*, Lipkova, J.*, Shit, S., Kofler, F., Collomb, N., Lemasson, B., …, Menze, B.</span>
+          <span class="title">Neural parameters estimation for brain tumor growth modeling</span>
+          <span class="venue">International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI), 2019.</span>
+          <span class="tags"><a href="https://link.springer.com/chapter/10.1007/978-3-030-32245-8_87">Paper</a></span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ================= TEACHING ================= -->
+  <section id="teaching">
+    <h2>Teaching &amp; Mentoring</h2>
+
+    <h3 class="sub">Teaching</h3>
+    <ul class="teach">
+      <li>
+        <span class="when">TU Munich, since 2022</span>
+        <strong>AI in Medicine I &amp; II</strong>
+        <span class="desc">Lectured and coordinated the course with practical projects focusing on medical AI for cohorts of 150+ graduate students.</span>
+      </li>
+      <li>
+        <span class="when">TU Munich, 2018–2020</span>
+        <strong>Informatics I for Engineering</strong>
+        <span class="desc">Coordinated tutorial sessions for 200+ undergraduate students.</span>
+      </li>
+    </ul>
+
+    <h3 class="sub">Student supervision</h3>
+    <p class="stats-inline"><span class="mono">4</span> PhD (co-supervised) · <span class="mono">15</span> MSc · <span class="mono">9</span> BSc</p>
+
+    <h3 class="sub">Professional service</h3>
+    <ul class="teach">
+      <li>
+        <strong>Journal reviewer</strong>
+        <span class="desc">IEEE Transactions on Medical Imaging (TMI), Medical Image Analysis (MedIA)</span>
+      </li>
+      <li>
+        <strong>Conference reviewer</strong>
+        <span class="desc">MICCAI, MIDL, WACV</span>
+      </li>
+      <li>
+        <strong>Grant reviewer</strong>
+        <span class="desc">Croucher Foundation</span>
+      </li>
+    </ul>
+
+    <h3 class="sub">Outreach</h3>
+    <ul class="teach">
+      <li>
+        <span class="when">Since 2026</span>
+        <strong>Responsible and Applied AI Center, Kenya</strong>
+        <span class="desc">Designed the structure and curriculum of the center.</span>
+      </li>
+      <li>
+        <span class="when">Since 2022</span>
+        <strong>Computer classes in Nepal and Kenya</strong>
+        <span class="desc">Built computer classrooms in remote schools.</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ================= AWARDS ================= -->
+  <section id="awards">
+    <h2>Awards</h2>
+    <ul class="awards">
+      <li><strong>2023</strong>: Summa cum laude, PhD thesis, TU Munich</li>
+      <li><strong>2021–2022</strong>: Two-time winner (1st place), MICCAI FeTS (Federated Tumor Segmentation) Challenge</li>
+      <li><strong>2021</strong>: Winner (1st place), MICCAI VALDO (Vascular Lesions Detection and Segmentation) Challenge</li>
+      <li><strong>2020</strong>: Winner (1st place), MICCAI FeTA (Fetal Brain Tissue Annotation and Segmentation) Challenge</li>
+      <li><strong>2018–2022</strong>: Marie Skłodowska-Curie PhD fellowship</li>
+      <li><strong>2018</strong>: NVIDIA GPU grant (co-applicant)</li>
+      <li><strong>2013–2015</strong>: Erasmus Mundus full MSc scholarship (awarded to approximately 2% of applicants)</li>
+      <li><strong>2007–2011</strong>: State scholarship for excellence in study</li>
+    </ul>
+  </section>
+
+  <!-- ================= NEWS ================= -->
+  <!-- EDIT: replace "2026" / "2025" / "2024" with the exact month where you know it, e.g. "Jul 2026" -->
+  <section id="news">
+    <h2>News</h2>
+    <ul class="news">
+      <li><time>Jun 2026</time><span>New preprint on <a href="https://arxiv.org/abs/2606.23223">wavelength selection for molecular composition inference from diffuse spectroscopy</a>, led by Kevin Scibilia.</span></li>
+      <li><time>Apr 2026</time><span>Final defense pitch in Berlin for the BMBF <strong>GO-Bio next</strong> startup grant on rapid tumor biopsy analysis with hyperspectral imaging and ML.</span></li>
+      <li><time>2026</time><span><a href="https://proceedings.mlr.press/v315/weidner26a.html">Brain tumor growth inversion via differentiable neural surrogates</a>, with PhD student Jonas Weidner, at <em>MIDL 2026</em>.</span></li>
+      <li><time>2026</time><span><a href="https://arxiv.org/abs/2509.13360"><em>PREDICT-GBM</em></a>, a multi-center platform for personalized glioblastoma radiotherapy planning, published in <em>npj Digital Medicine</em>.</span></li>
+      <li><time>2026</time><span>Started designing the structure for the Responsible and Applied AI Center in Kenya.</span></li>
+      <li><time>2025</time><span><a href="https://doi.org/10.1038/s41467-025-60366-4">Individualized glioma radiotherapy planning</a> published in <em>Nature Communications</em>.</span></li>
+      <li><time>2024</time><span><a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/49fb58cfd482a33619d48a5c5910cf3c-Abstract.html">Physics-regularized multi-modal image assimilation for brain tumor localization</a> at <em>NeurIPS 2024</em>.</span></li>
+      <li><time>Dec 2023</time><span>Completed my PhD at TU Munich with <strong>summa cum laude</strong>.</span></li>
+      <li><time>Oct 2023</time><span>Research stay at the Biomedical Optics Research Lab, UCL London, with Prof. Ilias Tachtsidis.</span></li>
+    </ul>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>
+      <a href="mailto:ivan.ezhov@tum.de">ivan.ezhov@tum.de</a><br>
+      Chair for AI in Healthcare and Medicine<br>
+      Technical University of Munich (TUM) and TUM University Hospital<br>
+      Munich, Germany
+    </p>
+  </section>
+
+    <!-- <section id="research">
+    <div class="visual-grid">
+      <a class="visual-card" href="image46.gif" data-lightbox="publication">
+        <img src="image46.gif" alt="Coronal MRI view of a brain with a simulated tumor growing over time">
+        <span>Coronal</span>
+      </a>
+      <a class="visual-card" href="image49.gif" data-lightbox="publication">
+        <img src="image49.gif" alt="Sagittal MRI view of a brain with a simulated tumor growing over time">
+        <span>Sagittal</span>
+      </a>
+      <a class="visual-card" href="image51.gif" data-lightbox="publication">
+        <img src="image51.gif" alt="Axial MRI view of a brain with a simulated tumor growing over time">
+        <span>Axial</span>
+      </a>
+    </div>
+    <p class="visual-caption">Coronal, sagittal, and axial MRI views of a patient brain with a tumor growing over time, simulated by a biophysical model.</p>
+  </section> -->
+
+</main>
+
+<!-- ================= OPTICS: hyperspectral imaging (bookend to the hero) ================= -->
+<section id="optics" aria-labelledby="optics-title">
+  <div class="op-figure">
+    <div class="op-stage">
+      <canvas id="hsi" role="img" aria-label="Simulated hyperspectral image of exposed brain cortex with a tumor. Hover to read the spectrum of any pixel."></canvas>
+      <div class="op-tag tl">HSI · SIMULATED · 450–950 nm · 51 BANDS</div>
+      <div class="op-tag tr" id="op-view">TRUE COLOR · RGB FROM CUBE</div>
+      <div class="op-tag bl" id="op-probe"></div>
+      <div class="op-legend" id="op-legend"><span>StO₂ 40%</span><i></i><span>100%</span></div>
+    </div>
+    <div class="op-controls">
+      <div class="op-tabs" role="group" aria-label="Image view">
+        <button type="button" data-view="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-view="color" aria-pressed="false">Color</button>
+        <button type="button" data-view="band" aria-pressed="false">Band</button>
+        <button type="button" data-view="sto2" aria-pressed="false">StO₂</button>
+      </div>
+      <label class="op-slider"><span>λ</span><input id="op-slider" type="range" min="450" max="950" step="1" value="560" aria-label="Wavelength in nanometres"><output id="op-lamv">560 nm</output></label>
+    </div>
+  </div>
+
+  <div class="op-copy">
+    <!-- <div class="op-kicker">Second line of research · Biomedical optics</div> -->
+    <h2 id="optics-title">…and read tissue<br>with <em>light</em>.</h2>
+    <p class="op-sub">Every molecule has its own spectral fingerprint: how strongly it absorbs light at each wavelength. A hyperspectral camera records a full spectrum for every pixel, and I develop methods that unmix those spectra into molecular composition (oxygenated and deoxygenated hemoglobin, water, lipids, cytochrome-c-oxidase) in real time, to help show surgeons where a tumor ends.</p>    <canvas id="spec" aria-hidden="true"></canvas>
+    <div class="op-readout" id="op-sto2">Unmixed concentrations</div>
+    <div class="op-bars" aria-label="Unmixed relative concentrations at the probe">
+      <div class="op-bar" data-k="o2"><span>HbO₂</span><i><b></b></i></div>
+      <div class="op-bar" data-k="hb"><span>HHb</span><i><b></b></i></div>
+      <div class="op-bar" data-k="w"><span>H₂O</span><i><b></b></i></div>
+    </div>
+    <!-- <div class="op-links">
+      <a href="https://pubmed.ncbi.nlm.nih.gov/39318967/">Real-time inference · JBO 2024</a>
+      <a href="https://link.springer.com/chapter/10.1007/978-3-032-06624-4_5">Spectral unmixing · CMMCA 2025</a>
+      <a href="https://ieeexplore.ieee.org/document/11283255">HSI segmentation · SIPAIM 2025</a>
+      <a href="https://arxiv.org/abs/2606.23223">Wavelength selection · 2026</a>
+    </div> -->
+    <div class="op-eq">
+      −ln <i>R</i>(λ) ≈ Σ<sub><i>i</i></sub> <i>c<sub>i</sub></i> ε<sub><i>i</i></sub>(λ) · <i>L</i> + <i>G</i>
+      <small>MODIFIED BEER–LAMBERT LAW</small>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div>© 2026 Ivan Ezhov · Last updated October 2026</div>
+  <div class="footer-links">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutzerklaerung.html">Datenschutzerklärung</a>
+  </div>
+</footer>
+
+
+  <div id="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
+    <button id="lightbox-close" aria-label="Close image preview">×</button>
+    <img id="lightbox-image" src="" alt="Expanded publication figure">
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const closeButton = document.getElementById('lightbox-close');
+    const syncGifs = () => {
+      document.querySelectorAll('img[src$=".gif"]').forEach((img) => {
+        const base = img.src.split('?')[0];
+        img.src = base + '?t=' + Date.now();
+      });
+    };
+
+    document.querySelectorAll('[data-lightbox="publication"]').forEach(link => {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        syncGifs();
+        lightboxImage.src = this.href;
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      syncGifs();
+    }
+
+    closeButton.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function (event) {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && lightbox.classList.contains('open')) {
+        closeLightbox();
+      }
+    });
+  </script>
+
+  <style>
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.96);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 24px;
+    }
+    #lightbox.open {
+      display: flex;
+    }
+    #lightbox-image {
+      max-width: min(90vw, 1000px);
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      color: #111;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+    }
+  </style>
+
+  <!-- Tumor growth simulation (hero) -->
+  <script>
+(() => {
+  const hero = document.getElementById('hero');
+  const cv = document.getElementById('sim');
+  const ctx = cv.getContext('2d');
+  const rT = document.getElementById('r-t'), rV = document.getElementById('r-v'), rC = document.getElementById('r-c');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Model parameters (grid units per step)
+  const D_WM = 0.2, D_GM = 0.025, RHO = 0.015, DAYS_PER_STEP = 0.25, CONTOUR = 0.3;
+
+  // ---- smooth value noise for tissue texture and folding ----
+  let s = 987654321;
+  const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  const G = 128, R = new Float32Array(G * G);
+  for (let i = 0; i < R.length; i++) R[i] = rnd();
+  const g = (a, b) => R[(a & (G - 1)) + (b & (G - 1)) * G];
+  function noise(x, y) {
+    const xi = Math.floor(x), yi = Math.floor(y);
+    let fx = x - xi, fy = y - yi;
+    fx = fx * fx * (3 - 2 * fx); fy = fy * fy * (3 - 2 * fy);
+    const a = g(xi, yi), b = g(xi + 1, yi), c = g(xi, yi + 1), d = g(xi + 1, yi + 1);
+    return a + (b - a) * fx + (c - a) * fy + (a - b - c + d) * fx * fy;
+  }
+  const fbm = (x, y) => (noise(x, y) * .5 + noise(x * 2.03 + 17, y * 2.03 + 9) * .25 +
+                         noise(x * 4.07 + 3, y * 4.07 + 31) * .125 + noise(x * 8.1 + 41, y * 8.1 + 7) * .0625) / .9375;
+
+  // ---- inferno-like colormap LUT ----
+  const stops = [[0, 0, 0, 4], [.25, 87, 16, 110], [.5, 188, 55, 84], [.75, 249, 142, 9], [1, 252, 255, 164]];
+  const LUT = new Uint8Array(256 * 3);
+  for (let n = 0; n < 256; n++) {
+    const x = n / 255;
+    let k = 0; while (k < stops.length - 2 && x > stops[k + 1][0]) k++;
+    const [x0, ...c0] = stops[k], [x1, ...c1] = stops[k + 1], f = (x - x0) / (x1 - x0);
+    for (let c = 0; c < 3; c++) LUT[n * 3 + c] = c0[c] + (c1[c] - c0[c]) * f;
+  }
+
+  // ---- anatomy helpers ----
+  const TAU = 3.2;   // cortical thickness in grid cells
+  const F = 34;      // number of primary sulci around the perimeter
+  const hash = n => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+  // capsule with tapering radius: signed distance to segment a→b
+  const segD = (px, py, ax, ay, bx, by, ra, rb) => {
+    const vx = bx - ax, vy = by - ay;
+    let h = ((px - ax) * vx + (py - ay) * vy) / (vx * vx + vy * vy);
+    h = h < 0 ? 0 : h > 1 ? 1 : h;
+    return Math.hypot(px - ax - vx * h, py - ay - vy * h) - (ra + (rb - ra) * h);
+  };
+  const ell = (px, py, x0, y0, a, b) => ((px - x0) / a) ** 2 + ((py - y0) / b) ** 2;
+
+  // ---- state ----
+  // type: 0 background, 1 cortical GM, 2 WM, 3 CSF, 4 skull/scalp, 5 deep GM
+  let W, H, N, S, u, v, type, alive, Dx, Dy, base, off, octx, img, cx, cy, rx, ry, tissueCount;
+  let t = 0, vol = 0, fading = 0, mouse = null, dpr = 1, frame = 0;
+
+  function build() {
+    const cw = hero.clientWidth, ch = hero.clientHeight;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.round(cw * dpr); cv.height = Math.round(ch * dpr);
+    const sc = 440 / Math.max(cw, ch);
+    W = Math.max(100, Math.round(cw * sc)); H = Math.max(100, Math.round(ch * sc)); N = W * H;
+    const wide = cw / ch > 1.1, b = Math.min(H, W * 1.15);
+    S = 0.42 * b; ry = S; rx = 0.82 * S;
+    cx = wide ? W * 0.68 : W * 0.5;
+    cy = wide ? H * 0.52 : H * 0.33;
+
+    type = new Uint8Array(N); alive = new Uint8Array(N);
+    u = new Float32Array(N); v = new Float32Array(N);
+    const lum = new Float32Array(N);
+    const TWO_PI = Math.PI * 2;
+
+    for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
+      const k = j * W + i, X = i - cx, Y = j - cy, x = X / S, y = Y / S;
+      const tex = fbm(i * 0.06, j * 0.06);
+      const th = Math.atan2(Y, X), rph = Math.hypot(X, Y);
+      // ovoid outline: narrower frontal pole, slight occipital taper, midline notches
+      const hw = 0.82 * (1 - 0.12 * Math.max(0, -y) ** 3 - 0.06 * Math.max(0, y) ** 3);
+      const re = Math.hypot(x / hw, y);
+      const Rb = 1 + 0.012 * Math.sin(th * 9 + 0.7)
+               + 0.03 * (fbm(2 + 1.4 * Math.cos(th), 5 + 1.4 * Math.sin(th)) - 0.5)
+               - 0.035 * Math.exp(-((x / 0.04) ** 2)) * Math.max(0, (Math.abs(y) - 0.7) / 0.3);
+      const L = re > 1e-4 ? Math.hypot(x, y) / re * S : S;
+      const s = (Rb - re) * L;          // depth below the brain surface, in cells
+      let ty = 0, l = 5;
+
+      if (s < 0) {
+        const d = -s;                   // subarachnoid space, skull tables, marrow, scalp
+        if (d < 1.3) { ty = 3; l = 12; }
+        else if (d < 2.8) { ty = 4; l = 20; }
+        else if (d < 5.2) { ty = 4; l = 66 + tex * 24; }
+        else if (d < 6.2) { ty = 4; l = 22; }
+        else if (d < 10.5) { ty = 4; l = 118 - (d - 6.2) * 12; }
+      } else {
+        const ax = Math.abs(x);
+        let csf = false, cort = s < TAU;
+
+        // interhemispheric fissure (stops at genu and splenium of the corpus callosum)
+        if (y < -0.4 || y > 0.47) {
+          const dF = Math.abs(x - 0.012 * Math.sin(y * 7 + 1) - 0.02 * (fbm(3, y * 6 + 40) - 0.5)) * S;
+          if (dF < 0.9) csf = true; else if (dF < 0.9 + TAU) cort = true;
+        }
+        // Sylvian fissure and insular cleft
+        const insX = 0.49 + 0.25 * (y + 0.02) ** 2 + 0.008 * Math.sin(y * 30);
+        if (y > -0.21 && y < 0.17) {
+          const hwC = 0.9 * Math.max(0, 1 - ((y + 0.02) / 0.19) ** 4);
+          const dC = Math.abs(ax - insX) * S;
+          if (dC < hwC) csf = true; else if (dC < hwC + TAU) cort = true;
+        }
+        if (ax > insX) {
+          const dS = Math.abs(y - (-0.03 + 0.1 * (ax - 0.5) + 0.018 * Math.sin(ax * 38 + 1))) * S;
+          const wS = 0.9 + 1.2 * Math.max(0, (ax - 0.7) / 0.15);
+          if (dS < wS) csf = true; else if (dS < wS + TAU) cort = true;
+        }
+        // cortical folding: radial sulci with varying depth, curvature and branches
+        if (s < 0.24 * S) {
+          // uneven spacing along the perimeter + a 2D warp field so each sulcus wanders
+          const warp = (fbm(3 + 1.3 * Math.cos(th), 7 + 1.3 * Math.sin(th)) - 0.5) * 7;
+          const wander = (fbm(i * 0.035 + 7, j * 0.035 + 3) - 0.5) * 11 * Math.min(1, s / (0.08 * S) + 0.3);
+          const phi = F * th + warp + wander;
+          const kq = Math.round(phi / TWO_PI), frac = phi - TWO_PI * kq, kk = ((kq % F) + F) % F;
+          const dep = (0.05 + 0.15 * Math.pow(hash(kk), 0.7)) * S;
+          const dt = Math.abs(frac) / F * rph;
+          const hwS = 0.45 + 1.1 * Math.max(0, 1 - s / dep) ** 2;
+          if (s < dep && dt < hwS) csf = true;
+          else if (s < dep + TAU && dt < hwS + TAU) cort = true;
+          if (hash(kk + 77) > 0.45) {      // shallower secondary sulcus mid-gyrus
+            const dep2 = (0.025 + 0.035 * hash(kk + 33)) * S;
+            const dt2 = (Math.PI - Math.abs(frac)) / F * rph;
+            const hw2 = 0.45 + 0.7 * Math.max(0, 1 - s / dep2);
+            if (s < dep2 && dt2 < hw2) csf = true;
+            else if (s < dep2 + TAU && dt2 < hw2 + TAU) cort = true;
+          }
+        }
+
+        if (csf) { ty = 3; l = 12; }
+        else if (cort) { ty = 1; l = 62 + (tex - 0.5) * 14; }
+        else {
+          // deep structures (mirrored left/right)
+          const sept = ax < 0.007 && y > -0.42 && y < 0;
+          const eC = ell(ax, y, 0.155, -0.2, 0.065, 0.1), caud = eC < 1;
+          const v3 = segD(x, y, 0, -0.03, 0, 0.17, 0.011, 0.011) < 0;
+          const eT = ell(ax, y, 0.105, 0.08, 0.09, 0.14), thal = eT < 1;
+          const latV = !sept && (
+            segD(ax, y, 0.03, -0.04, 0.09, -0.22, 0.05, 0.04) < 0 ||   // frontal horn
+            segD(ax, y, 0.09, -0.22, 0.13, -0.33, 0.04, 0.012) < 0 ||
+            segD(ax, y, 0.15, 0.26, 0.21, 0.33, 0.022, 0.035) < 0 ||   // atrium
+            segD(ax, y, 0.21, 0.33, 0.17, 0.52, 0.035, 0.008) < 0);    // occipital horn
+          const a = 0.3, dx = ax - 0.275, dy = y + 0.03;
+          const al = dx * Math.sin(a) + dy * Math.cos(a), ac = dx * Math.cos(a) - dy * Math.sin(a);
+          const eL = (al / 0.17) ** 2 + (ac / 0.06) ** 2, lent = eL < 1;
+          const wm = 128 + (tex - 0.5) * 12;
+          // soft nucleus borders: blend toward white matter near the edge
+          const soft = (e, val) => wm + (val - wm) * Math.min(1, Math.max(0, (1 - e) / 0.45));
+          if (caud) { ty = 5; l = soft(eC, 84 + (tex - 0.5) * 10); }
+          else if (v3 || latV) { ty = 3; l = 12; }
+          else if (thal) { ty = 5; l = soft(eT, 92 + (tex - 0.5) * 10); }
+          else if (lent) { ty = 5; l = soft(eL, ac < -0.018 ? 104 : 80); }   // globus pallidus brighter than putamen
+          else { ty = 2; l = wm; }
+        }
+        l *= 1 + 0.08 * (fbm(i * 0.012 + 5, j * 0.012 + 5) - 0.5);   // coil bias field
+      }
+      type[k] = ty; lum[k] = l;
+    }
+
+    // diffusivity on cell faces (harmonic mean: zero flux into CSF/background)
+    const Dc = new Float32Array(N);
+    tissueCount = 0;
+    for (let k = 0; k < N; k++) {
+      Dc[k] = type[k] === 2 ? D_WM : (type[k] === 1 || type[k] === 5) ? D_GM : 0;
+      alive[k] = Dc[k] > 0 ? 1 : 0;
+      tissueCount += alive[k];
+    }
+    Dx = new Float32Array(N); Dy = new Float32Array(N);
+    for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
+      const k = j * W + i, a = Dc[k];
+      if (i < W - 1) { const bb = Dc[k + 1]; Dx[k] = a && bb ? 2 * a * bb / (a + bb) : 0; }
+      if (j < H - 1) { const bb = Dc[k + W]; Dy[k] = a && bb ? 2 * a * bb / (a + bb) : 0; }
+    }
+
+    // partial-volume blur + scanner noise, then to RGB
+    base = new Uint8ClampedArray(N * 3);
+    for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
+      const k = j * W + i;
+      let l = lum[k];
+      if (i > 0 && j > 0 && i < W - 1 && j < H - 1) {
+        l = (4 * lum[k] + 2 * (lum[k - 1] + lum[k + 1] + lum[k - W] + lum[k + W])
+             + lum[k - W - 1] + lum[k - W + 1] + lum[k + W - 1] + lum[k + W + 1]) / 16;
+      }
+      if (l > 8) l += (rnd() - 0.5) * 5;
+      base[k * 3] = l; base[k * 3 + 1] = l; base[k * 3 + 2] = l * 1.04 + 1;
+    }
+
+    off = document.createElement('canvas'); off.width = W; off.height = H;
+    octx = off.getContext('2d'); img = octx.createImageData(W, H);
+    t = 0; fading = 0;
+    seed(Math.round(cx + 0.32 * S), Math.round(cy - 0.5 * S)) || seedRandom();
+    if (reduce) { for (let n = 0; n < 900; n++) step(); render(); }
+  }
+
+  function seed(i, j) {
+    if (i < 6 || j < 6 || i > W - 7 || j > H - 7 || !alive[j * W + i]) return false;
+    for (let dy = -5; dy <= 5; dy++) for (let dx = -5; dx <= 5; dx++) {
+      if (dx * dx + dy * dy > 22) continue;
+      const k = (j + dy) * W + (i + dx);
+      if (alive[k]) u[k] = 1;
+    }
+    return true;
+  }
+  function seedRandom() {
+    for (let tries = 0; tries < 5000; tries++) {
+      const i = Math.floor(rnd() * W), j = Math.floor(rnd() * H);
+      if (type[j * W + i] === 2 && seed(i, j)) return;
+    }
+  }
+
+  function step() {
+    for (let j = 1; j < H - 1; j++) for (let i = 1; i < W - 1; i++) {
+      const k = j * W + i;
+      if (!alive[k]) { v[k] = 0; continue; }
+      const a = u[k];
+      const flux = Dx[k] * (u[k + 1] - a) - Dx[k - 1] * (a - u[k - 1])
+                 + Dy[k] * (u[k + W] - a) - Dy[k - W] * (a - u[k - W]);
+      v[k] = a + flux + RHO * a * (1 - a);
+    }
+    const tmp = u; u = v; v = tmp;
+    t += DAYS_PER_STEP;
+  }
+
+  function render() {
+    const d = img.data;
+    for (let k = 0; k < N; k++) {
+      const p = k * 4, q = k * 3;
+      let r = base[q], gg = base[q + 1], b = base[q + 2];
+      const a = u[k];
+      if (a > 0.01) {
+        const al = Math.min(1, (a - 0.01) / 0.35) * 0.92, c = Math.min(255, a * 255 | 0) * 3;
+        r += (LUT[c] - r) * al; gg += (LUT[c + 1] - gg) * al; b += (LUT[c + 2] - b) * al;
+      }
+      d[p] = r; d[p + 1] = gg; d[p + 2] = b; d[p + 3] = 255;
+    }
+    // segmentation contour at u = CONTOUR, and tumor volume
+    vol = 0;
+    for (let j = 1; j < H - 1; j++) for (let i = 1; i < W - 1; i++) {
+      const k = j * W + i;
+      if (u[k] >= CONTOUR) {
+        vol++;
+        if (u[k - 1] < CONTOUR || u[k + 1] < CONTOUR || u[k - W] < CONTOUR || u[k + W] < CONTOUR) {
+          const p = k * 4; d[p] = 255; d[p + 1] = 238; d[p + 2] = 205;
+        }
+      }
+    }
+    octx.putImageData(img, 0, 0);
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(off, 0, 0, cv.width, cv.height);
+
+    // orientation labels (radiological convention)
+    const sx = cv.width / W, sy = cv.height / H;
+    ctx.fillStyle = 'rgba(139,138,136,.8)';
+    ctx.font = `500 ${11 * dpr}px "JetBrains Mono", monospace`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('A', cx * sx, (cy - ry * 1.2) * sy);
+    ctx.fillText('P', cx * sx, (cy + ry * 1.2) * sy);
+    const edge = 14 * dpr;
+    ctx.fillText('R', Math.max(edge, (cx - rx * 1.25) * sx), cy * sy);
+    ctx.fillText('L', Math.min(cv.width - edge, (cx + rx * 1.25) * sx), cy * sy);
+
+    // crosshair
+    if (mouse) {
+      const X = mouse.x * dpr, Y = mouse.y * dpr;
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255,179,107,.35)'; ctx.lineWidth = dpr;
+      ctx.setLineDash([4 * dpr, 6 * dpr]);
+      ctx.beginPath(); ctx.moveTo(0, Y); ctx.lineTo(cv.width, Y); ctx.moveTo(X, 0); ctx.lineTo(X, cv.height); ctx.stroke();
+      ctx.setLineDash([]); ctx.strokeStyle = 'rgba(255,179,107,.9)';
+      ctx.beginPath(); ctx.arc(X, Y, 6 * dpr, 0, Math.PI * 2); ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  function updateReadout() {
+    rT.textContent = `t = ${Math.round(t)} d`;
+    rV.textContent = `${(100 * vol / Math.max(1, tissueCount)).toFixed(1)}%`;
+    if (mouse) {
+      const i = Math.floor(mouse.x / hero.clientWidth * W), j = Math.floor(mouse.y / hero.clientHeight * H);
+      const k = j * W + i, ty = type[k];
+      const label = ['outside', 'cortical grey matter', 'white matter', 'CSF', 'skull / scalp', 'deep grey matter'][ty] || 'outside';
+      rC.textContent = `x ${String(i).padStart(3, '0')} · y ${String(j).padStart(3, '0')} · ${label}` +
+                       (alive[k] ? ` · u ${u[k].toFixed(2)}` : '');
+    } else {
+      rC.textContent = 'click inside the brain to seed a tumor';
+    }
+  }
+
+  // ---- interaction ----
+  hero.addEventListener('pointermove', e => {
+    const r = hero.getBoundingClientRect();
+    mouse = { x: e.clientX - r.left, y: e.clientY - r.top };
+    if (reduce) { render(); updateReadout(); }
+  });
+  hero.addEventListener('pointerleave', () => { mouse = null; if (reduce) { render(); updateReadout(); } });
+  hero.addEventListener('click', e => {
+    if (e.target.closest('a')) return;
+    const r = hero.getBoundingClientRect();
+    const i = Math.floor((e.clientX - r.left) / r.width * W), j = Math.floor((e.clientY - r.top) / r.height * H);
+    if (seed(i, j)) {
+      fading = 0;
+      if (reduce) { for (let n = 0; n < 300; n++) step(); render(); updateReadout(); }
+    }
+  });
+
+  let resizeTimer;
+  addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { build(); render(); updateReadout(); }, 200);
+  });
+
+  // ---- main loop ----
+  let last = performance.now(), acc = 0, visible = true;
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(hero);
+
+  function loop(now) {
+    const dt = Math.min(100, now - last); last = now;
+    if (visible) {
+      if (fading) {
+        for (let k = 0; k < N; k++) u[k] *= 0.93;
+        if (++fading > 70) { u.fill(0); t = 0; fading = 0; seedRandom(); }
+      } else {
+        acc += dt;
+        let n = 0;
+        while (acc >= 8 && n < 4) { step(); acc -= 8; n++; }
+        if (vol / tissueCount > 0.42 || t > 420) fading = 1;
+      }
+      render();
+      if (++frame % 6 === 0) updateReadout();
+    }
+    requestAnimationFrame(loop);
+  }
+
+  build();
+  render(); updateReadout();
+  if (!reduce) requestAnimationFrame(loop);
+})();
+</script>
+
+  <!-- Hyperspectral imaging simulation (optics section) -->
+  <script>
+(() => {
+  const sec = document.getElementById('optics');
+  if (!sec) return;
+  const stage = sec.querySelector('.op-stage');
+  const fig = document.getElementById('hsi'), fctx = fig.getContext('2d');
+  const spc = document.getElementById('spec'), sctx = spc.getContext('2d');
+  const tagV = document.getElementById('op-view'), tagP = document.getElementById('op-probe');
+  const legend = document.getElementById('op-legend');
+  const slider = document.getElementById('op-slider'), lamV = document.getElementById('op-lamv');
+  const stoOut = document.getElementById('op-sto2');
+  const tabs = [...sec.querySelectorAll('[data-view]')];
+  const bars = {};
+  sec.querySelectorAll('.op-bar').forEach(el => { bars[el.dataset.k] = el.querySelector('b'); });
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- helpers ----------
+  let s = 20240917;
+  const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  const GN = 128, RN = new Float32Array(GN * GN);
+  for (let i = 0; i < RN.length; i++) RN[i] = rnd();
+  const gv = (a, b) => RN[(a & (GN - 1)) + (b & (GN - 1)) * GN];
+  function noise(x, y) {
+    const xi = Math.floor(x), yi = Math.floor(y);
+    let fx = x - xi, fy = y - yi;
+    fx = fx * fx * (3 - 2 * fx); fy = fy * fy * (3 - 2 * fy);
+    const a = gv(xi, yi), b = gv(xi + 1, yi), c = gv(xi, yi + 1), d = gv(xi + 1, yi + 1);
+    return a + (b - a) * fx + (c - a) * fy + (a - b - c + d) * fx * fy;
+  }
+  const fbm = (x, y) => (noise(x, y) * .5 + noise(x * 2.03 + 17, y * 2.03 + 9) * .25 +
+                         noise(x * 4.07 + 3, y * 4.07 + 31) * .125 + noise(x * 8.1 + 41, y * 8.1 + 7) * .0625) / .9375;
+  const sstep = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const ease = t => t * t * (3 - 2 * t);
+
+  // ---------- absorption spectra, 450–950 nm in 10 nm steps ----------
+  const NB = 51, LAM = new Float32Array(NB);
+  for (let b = 0; b < NB; b++) LAM[b] = 450 + 10 * b;
+  // molar extinction of hemoglobin, cm^-1/M (after Prahl)
+  const E_O2 = [62816, 44480, 33209, 26629, 23684, 20932, 20035, 24202, 39956, 53236, 43016, 32613, 44496, 50104, 14400, 3200,
+    1506, 942, 610, 442, 368, 320, 294, 278, 276, 290, 314, 348, 390, 446, 518, 586, 650, 710, 770, 816,
+    864, 916, 974, 1022, 1058, 1092, 1128, 1154, 1178, 1198, 1214, 1224, 1222, 1214, 1204];
+  const E_HB = [103292, 23389, 16156, 14550, 16684, 20035, 25774, 31590, 39036, 46592, 53412, 53788, 45072, 37020, 28324, 14677,
+    9444, 6510, 5149, 4345, 3750, 3227, 2795, 2408, 2052, 1794, 1540, 1326, 1102, 1116, 1405, 1549, 1312, 1075, 883, 762,
+    717, 694, 693, 692, 691, 694, 708, 728, 744, 762, 764, 750, 720, 680, 640];
+  // pure water absorption, 1/cm
+  const MU_W = [.0001, .0001, .0001, .0002, .0002, .0003, .0004, .0005, .0005, .0006, .0006, .0007, .0008, .0009, .0013, .0023,
+    .0026, .0029, .0031, .0033, .0034, .0041, .0044, .0047, .0052, .0060, .0080, .0105, .0160, .0260, .0260, .0245, .0230, .0215, .0195, .0200,
+    .0225, .0275, .0300, .0350, .0430, .0470, .0560, .0600, .0640, .0680, .0800, .1100, .1500, .2400, .2900];
+  const gs = (l, m, w) => Math.exp(-0.5 * ((l - m) / w) ** 2);
+  // lipid, 1/cm (smooth fit with the 760 / 930 nm bands)
+  const MU_L = Array.from(LAM, l => 0.006 + 0.07 * Math.exp(-(l - 450) / 40) + 0.02 * gs(l, 762, 10) + 0.03 * gs(l, 900, 18) + 0.19 * gs(l, 930, 11));
+  const HB = 2.303 * 150 / 64500;          // whole blood: 150 g/L hemoglobin
+  const AF = 2.9;                          // internal reflection parameter
+  const reflect = (mua, musp) => {         // diffusion-theory total diffuse reflectance
+    const q = mua / (mua + musp), ap = 1 - q;
+    return ap / (1 + 2 * AF * q + (1 + 2 * AF / 3) * Math.sqrt(3 * q));
+  };
+
+  // ---------- CIE 1931 colour matching (Wyman et al. fits) → sRGB weights per band ----------
+  const lobe = (l, m, s1, s2) => { const t = (l - m) / (l < m ? s1 : s2); return Math.exp(-0.5 * t * t); };
+  const xb = l => 1.056 * lobe(l, 599.8, 37.9, 31.0) + 0.362 * lobe(l, 442.0, 16.0, 26.7) - 0.065 * lobe(l, 501.1, 20.4, 26.2);
+  const yb = l => 0.821 * lobe(l, 568.8, 46.9, 40.5) + 0.286 * lobe(l, 530.9, 16.3, 31.1);
+  const zb = l => 1.217 * lobe(l, 437.0, 11.8, 36.0) + 0.681 * lobe(l, 459.0, 26.0, 13.8);
+  const WR = new Float32Array(NB), WG = new Float32Array(NB), WB = new Float32Array(NB);
+  { let sr = 0, sg = 0, sb = 0;
+    for (let b = 0; b < NB; b++) {
+      const l = LAM[b]; if (l > 730) continue;
+      const X = xb(l), Y = yb(l), Z = zb(l);
+      WR[b] = 3.2406 * X - 1.5372 * Y - 0.4986 * Z;
+      WG[b] = -0.9689 * X + 1.8758 * Y + 0.0415 * Z;
+      WB[b] = 0.0557 * X - 0.2040 * Y + 1.0570 * Z;
+      sr += WR[b]; sg += WG[b]; sb += WB[b];
+    }
+    for (let b = 0; b < NB; b++) { WR[b] /= sr; WG[b] /= sg; WB[b] /= sb; } }
+  const GAM = new Uint8ClampedArray(4097);
+  for (let i = 0; i <= 4096; i++) { const v = i / 4096; GAM[i] = 255 * (v <= 0.0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) - 0.055); }
+  const toS = v => GAM[v <= 0 ? 0 : v >= 1 ? 4096 : (v * 4096) | 0];
+
+  function lamRGB(l) {
+    let r = 0, g = 0, b = 0;
+    if (l < 490) { g = Math.max(0, (l - 440) / 50); b = 1; }
+    else if (l < 510) { g = 1; b = (510 - l) / 20; }
+    else if (l < 580) { r = (l - 510) / 70; g = 1; }
+    else if (l < 645) { r = 1; g = (645 - l) / 65; }
+    else r = 1;
+    const a = l > 690 ? Math.max(0, 1 - (l - 690) / 110) : 1;   // near-infrared fades to a muted mauve
+    return [r * a + (1 - a) * 0.55, g * a + (1 - a) * 0.42, b * a + (1 - a) * 0.5];
+  }
+
+  // ---------- scene ----------
+  const G = 240, NP = G * G;
+  const NAMES = ['', 'cortex', 'tumor', 'vein', 'artery', 'dura', 'tumor vessel'];
+  let built = false, building = false;
+  const yieldT = () => new Promise(r => setTimeout(r, 0));
+  let cls, alpha, cube, shade, spec, colRGB, stoRGB, bandNorm, est, stoEst, stoTrue, refCortex, refTumor, YMAX, pNorm;
+
+  async function build() {
+    cls = new Uint8Array(NP); alpha = new Float32Array(NP);
+    const fb = new Float32Array(NP), St = new Float32Array(NP), fw = new Float32Array(NP), fl = new Float32Array(NP);
+    const sa = new Float32Array(NP), sbp = new Float32Array(NP), h = new Float32Array(NP), sul = new Float32Array(NP);
+    const tum = new Float32Array(NP), micro = new Float32Array(NP);
+    const vp = new Float32Array(NP), vS = new Float32Array(NP), vT = new Uint8Array(NP), vR = new Float32Array(NP);
+    const openR = th => 0.43 * (1 + 0.05 * Math.sin(3 * th + 0.6) + 0.03 * Math.sin(5 * th + 2.1));
+    const TX = 0.635, TY = 0.6, TR = 0.165;
+
+    for (let j = 0; j < G; j++) for (let i = 0; i < G; i++) {
+      const k = j * G + i, x = (i + 0.5) / G, y = (j + 0.5) / G;
+      const dx = x - 0.5, dy = y - 0.5, r = Math.hypot(dx, dy), th = Math.atan2(dy, dx);
+      const ro = openR(th) + 0.025 * (fbm(3 + 1.5 * Math.cos(th), 4 + 1.5 * Math.sin(th)) - 0.5);
+      const mc = fbm(i * 0.22, j * 0.22); micro[k] = mc;
+      if (r > ro + 0.045) continue;
+      if (r > ro) {                                     // dural margin of the craniotomy
+        cls[k] = 5; alpha[k] = 1 - sstep(ro + 0.028, ro + 0.045, r);
+        fb[k] = 0.012 + 0.01 * mc; St[k] = 0.8; fw[k] = 0.65; fl[k] = 0.18; sa[k] = 42; sbp[k] = 1.1;
+        h[k] = 0.5 + 0.15 * mc;
+        continue;
+      }
+      alpha[k] = 1;
+      const wx = x + 0.12 * (fbm(x * 3 + 5, y * 3 + 1) - 0.5), wy = y + 0.12 * (fbm(x * 3 + 9, y * 3 + 7) - 0.5);
+      // gyral folds: meandering, roughly parallel sulci
+      const ph = 2 * Math.PI * (4.6 * (0.78 * wx + 0.62 * wy) + 1.1 * (fbm(wx * 2.4 + 20, wy * 2.4 + 4) - 0.5) * 3);
+      const sd = Math.abs(Math.sin(ph)) / (2 * Math.PI * 4.6) * 1.1;
+      const tdx = x - TX, tdy = y - TY, tth = Math.atan2(tdy, tdx);
+      const trad = TR * (1 + 0.7 * (fbm(2 + 1.2 * Math.cos(tth), 9 + 1.2 * Math.sin(tth)) - 0.5));
+      const tr = Math.hypot(tdx, tdy) / trad;
+      const m = 1 - sstep(0.7, 1.25, tr);
+      const su = (1 - sstep(0.004, 0.022, sd)) * (1 - m);
+      tum[k] = m; sul[k] = su;
+      cls[k] = m > 0.5 ? 2 : 1;
+      fb[k] = lerp(0.028 + 0.08 * su + 0.012 * (mc - 0.5), 0.07 + 0.025 * (mc - 0.5), m);
+      St[k] = lerp(0.78 + 0.05 * (fbm(i * 0.05 + 30, j * 0.05) - 0.5) - 0.06 * su, 0.5 + 0.06 * (mc - 0.5), m);
+      fw[k] = lerp(0.75, 0.86, m); fl[k] = lerp(0.09, 0.03, m);
+      sa[k] = lerp(22, 15, m); sbp[k] = lerp(1.4, 1.0, m);
+      h[k] = lerp(0.16 * sstep(0, 0.06, sd), 0.3 + 0.1 * (1 - Math.min(1, tr)), m) + 0.025 * mc;
+    }
+
+    // vessels: branching random walks
+    let stamps = 0;
+    function stamp(x, y, r, sv, ty) {
+      const R = Math.max(r, 0.7);
+      stamps++;
+      for (let py = Math.floor(y - R - 1); py <= y + R + 1; py++) for (let px = Math.floor(x - R - 1); px <= x + R + 1; px++) {
+        if (px < 0 || py < 0 || px >= G || py >= G) continue;
+        const d = Math.hypot(px + 0.5 - x, py + 0.5 - y);
+        if (d >= R) continue;
+        const k = py * G + px, p = Math.sqrt(1 - (d / R) ** 2) * Math.min(1, r / 0.7);
+        if (p > vp[k]) { vp[k] = p; vS[k] = sv; vT[k] = ty; vR[k] = r; }
+      }
+    }
+    function grow(x, y, ang, r, sv, ty, wig, bp, taper, depth) {
+      let turn = 0;
+      for (let n = 0; n < 320 && stamps < 16000; n++) {
+        if (x < 1 || y < 1 || x >= G - 1 || y >= G - 1) break;
+        const k = (y | 0) * G + (x | 0), c = cls[k];
+        if (c === 0 || (c === 5 && n > 14)) break;
+        if (ty === 6 && tum[k] < 0.3) break;
+        stamp(x, y, r, sv, ty);
+        turn = turn * 0.88 + (rnd() - 0.5) * wig;
+        ang += turn;
+        x += Math.cos(ang) * 0.6; y += Math.sin(ang) * 0.6;
+        r *= taper;
+        if (r < 0.45) break;
+        if (depth < 3 && rnd() < bp * 0.6 ** depth)
+          grow(x, y, ang + (rnd() < 0.5 ? -1 : 1) * (0.5 + 0.6 * rnd()), r * 0.62, sv, ty, wig, bp, taper, depth + 1);
+      }
+    }
+    const fromEdge = (th, r, sv, ty, wig, bp, taper) => {
+      const ro = openR(th) * G * 0.97;
+      grow(G / 2 + Math.cos(th) * ro, G / 2 + Math.sin(th) * ro, th + Math.PI + (rnd() - 0.5) * 0.9, r, sv, ty, wig, bp, taper, 0);
+    };
+    for (const th of [0.4, 2.2, 3.6, 5.2]) fromEdge(th + (rnd() - 0.5) * 0.3, 2.7 + 0.7 * rnd(), 0.62, 3, 0.045, 0.008, 0.998);
+    for (const th of [1.2, 2.9, 4.4]) fromEdge(th + (rnd() - 0.5) * 0.3, 1.4 + 0.4 * rnd(), 0.97, 4, 0.09, 0.012, 0.996);
+    for (let n = 0; n < 16; n++) {
+      const a = rnd() * 2 * Math.PI, rr = Math.sqrt(rnd()) * 0.75 * TR * G;
+      grow(TX * G + Math.cos(a) * rr, TY * G + Math.sin(a) * rr, rnd() * 2 * Math.PI, 0.7 + 0.4 * rnd(), 0.56, 6, 0.55, 0, 0.985, 3);
+    }
+
+    for (let k = 0; k < NP; k++) {
+      const p = vp[k];
+      if (!cls[k] || p <= 0) continue;
+      const bt = (vT[k] === 3 ? 0.55 : vT[k] === 4 ? 0.4 : 0.45) * p, fbt = fb[k] * (1 - p) + bt;
+      St[k] = (fb[k] * (1 - p) * St[k] + bt * vS[k]) / fbt;
+      fb[k] = fbt; fw[k] = lerp(fw[k], 0.8, p); fl[k] *= 1 - p; sa[k] = lerp(sa[k], 14, p); sbp[k] = lerp(sbp[k], 1.0, p);
+      h[k] += 0.1 * p * Math.min(1, vR[k] / 2);
+      if (p > 0.45 && cls[k] !== 5) cls[k] = vT[k];
+    }
+    stoTrue = St;
+
+    await yieldT();
+    // hyperspectral cube
+    cube = new Float32Array(NP * NB);
+    const LR = Array.from(LAM, l => Math.log(l / 500));
+    for (let k = 0; k < NP; k++) {
+      if (k && k % (G * 40) === 0) await yieldT();
+      if (!cls[k]) continue;
+      const o = k * NB, bl = fb[k] * HB, S = St[k];
+      for (let b = 0; b < NB; b++) {
+        const mua = bl * (S * E_O2[b] + (1 - S) * E_HB[b]) + fw[k] * MU_W[b] + fl[k] * MU_L[b] + 0.015;
+        const musp = sa[k] * Math.exp(-sbp[k] * LR[b]);
+        cube[o + b] = reflect(mua, musp) * (1 + 0.012 * (rnd() + rnd() + rnd() - 1.5));
+      }
+    }
+
+    await yieldT();
+    // surface relief → shading and wet specular glints
+    for (let pass = 0; pass < 2; pass++) {
+      const t = h.slice();
+      for (let j = 1; j < G - 1; j++) for (let i = 1; i < G - 1; i++) {
+        const k = j * G + i;
+        h[k] = (4 * t[k] + 2 * (t[k - 1] + t[k + 1] + t[k - G] + t[k + G]) + t[k - G - 1] + t[k - G + 1] + t[k + G - 1] + t[k + G + 1]) / 16;
+      }
+    }
+    shade = new Float32Array(NP); spec = new Float32Array(NP);
+    const ln = Math.hypot(-0.45, -0.55, 0.7), Lx = -0.45 / ln, Ly = -0.55 / ln, Lz = 0.7 / ln;
+    const hn = Math.hypot(Lx, Ly, Lz + 1), Hx = Lx / hn, Hy = Ly / hn, Hz = (Lz + 1) / hn;
+    const KH = 13;
+    for (let j = 1; j < G - 1; j++) for (let i = 1; i < G - 1; i++) {
+      const k = j * G + i;
+      if (!cls[k]) continue;
+      const gx = (h[k + 1] - h[k - 1]) * KH, gy = (h[k + G] - h[k - G]) * KH, nn = Math.hypot(gx, gy, 1);
+      const nx = -gx / nn, ny = -gy / nn, nz = 1 / nn;
+      const ndl = Math.max(0, nx * Lx + ny * Ly + nz * Lz);
+      shade[k] = (0.5 + 0.6 * ndl) * (1 - 0.55 * sul[k]);
+      const wet = cls[k] === 5 ? 0.3 : (vp[k] > 0.3 ? 1.4 : 1);
+      spec[k] = wet * 0.4 * Math.max(0, nx * Hx + ny * Hy + nz * Hz) ** 90 * (0.3 + 1.4 * micro[k] ** 2);
+    }
+
+    // true colour, synthesised from the cube
+    colRGB = new Uint8ClampedArray(NP * 3);
+    for (let k = 0; k < NP; k++) {
+      if (!cls[k]) continue;
+      const o = k * NB;
+      let r = 0, g = 0, bb = 0;
+      for (let b = 0; b < 29; b++) { const R = cube[o + b]; r += WR[b] * R; g += WG[b] * R; bb += WB[b] * R; }
+      const e = 1.2 * shade[k], sp = spec[k];
+      colRGB[k * 3] = toS(r * e + sp); colRGB[k * 3 + 1] = toS(g * e + sp); colRGB[k * 3 + 2] = toS(bb * e + sp);
+    }
+
+    // per-band auto-exposure
+    const tissue = [];
+    for (let k = 0; k < NP; k += 3) if (cls[k] && cls[k] !== 5) tissue.push(k);
+    const pct = (arr, p) => { const a = Float32Array.from(arr).sort(); return a[Math.min(a.length - 1, Math.floor(p * a.length))]; };
+    bandNorm = new Float32Array(NB);
+    for (let b = 0; b < NB; b++) bandNorm[b] = pct(tissue.map(k => cube[k * NB + b]), 0.97);
+
+    // ---- spectral unmixing ----
+    // 1) invert diffusion-theory reflectance per band: R → μa/μs'
+    // 2) weighted least squares on μa ≈ Σ c_i ε_i(λ) + const, assuming μs' ∝ (λ/500)^-1.3
+    const NQ = 2048, QL = new Float64Array(NQ), RQ = new Float64Array(NQ);
+    for (let n = 0; n < NQ; n++) { const q = Math.exp(Math.log(1e-5) + n / (NQ - 1) * Math.log(0.98 / 1e-5)); QL[n] = q / (1 - q); RQ[n] = reflect(q, 1 - q); }
+    const ratioOf = R => {            // RQ decreases with n
+      if (R >= RQ[0]) return QL[0];
+      if (R <= RQ[NQ - 1]) return QL[NQ - 1];
+      let lo = 0, hi = NQ - 1;
+      while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (RQ[mid] > R) lo = mid; else hi = mid; }
+      const f = (RQ[lo] - R) / (RQ[lo] - RQ[hi]); return QL[lo] + f * (QL[hi] - QL[lo]);
+    };
+    const F0 = 5, F1 = 50, NF = F1 - F0 + 1, NC = 5;
+    const BAS = [];
+    for (let f = 0; f < NF; f++) { const b = F0 + f; BAS.push([HB * E_O2[b], HB * E_HB[b], MU_W[b], MU_L[b], 1]); }
+    const scl = [0, 1, 2, 3, 4].map(c => Math.hypot(...BAS.map(r => r[c])) / Math.sqrt(NF));
+    for (const r of BAS) for (let c = 0; c < NC; c++) r[c] /= scl[c];
+    // scattering slope b is unknown per pixel: grid-search it, keep the best weighted fit
+    const BS = [0.8, 0.95, 1.1, 1.25, 1.4, 1.55, 1.7];
+    const SWs = BS.map(bb => Array.from({ length: NF }, (_, f) => 20 * (LAM[F0 + f] / 500) ** -bb));
+    est = new Float32Array(NP * 4); stoEst = new Float32Array(NP);
+    const M = new Float64Array(NC * NC), v = new Float64Array(NC), x = new Float64Array(NC), best = new Float64Array(NC);
+    const rat = new Float64Array(NF), wt = new Float64Array(NF), y = new Float64Array(NF);
+    for (let k = 0; k < NP; k++) {
+      if (k && k % (G * 8) === 0) await yieldT();
+      if (!cls[k]) continue;
+      const o = k * NB;
+      for (let f = 0; f < NF; f++) {
+        const R = cube[o + F0 + f]; rat[f] = ratioOf(R);
+        wt[f] = Math.min(1, R / 0.08) ** 2 / (1 + rat[f] * 20 * 0.02);      // trust bright, unsaturated bands more
+      }
+      let bestE = Infinity;
+      for (let g = 0; g < BS.length; g++) {
+        const sw = SWs[g];
+        M.fill(0); v.fill(0);
+        for (let f = 0; f < NF; f++) {
+          y[f] = rat[f] * sw[f];
+          const r = BAS[f], w = wt[f];
+          for (let a2 = 0; a2 < NC; a2++) { const wa = w * r[a2]; v[a2] += wa * y[f]; for (let c = 0; c < NC; c++) M[a2 * NC + c] += wa * r[c]; }
+        }
+        for (let a2 = 0; a2 < NC; a2++) M[a2 * NC + a2] += 1e-6;
+        for (let c = 0; c < NC; c++) {
+          const d = M[c * NC + c];
+          for (let r = c + 1; r < NC; r++) {
+            const f = M[r * NC + c] / d;
+            for (let q = c; q < NC; q++) M[r * NC + q] -= f * M[c * NC + q];
+            v[r] -= f * v[c];
+          }
+        }
+        for (let c = NC - 1; c >= 0; c--) { let sm = v[c]; for (let q = c + 1; q < NC; q++) sm -= M[c * NC + q] * x[q]; x[c] = sm / M[c * NC + c]; }
+        let e = 0, ys = 0;
+        for (let f = 0; f < NF; f++) { let p = 0; const r = BAS[f]; for (let c = 0; c < NC; c++) p += r[c] * x[c]; e += wt[f] * (y[f] - p) ** 2; ys += wt[f] * y[f] * y[f]; }
+        e /= ys + 1e-12;                                                  // relative residual (scale-free across b)
+        if (e < bestE) { bestE = e; best.set(x); }
+      }
+      for (let c = 0; c < 4; c++) est[k * 4 + c] = Math.max(0, best[c] / scl[c]);
+      const o2 = est[k * 4], hb = est[k * 4 + 1];
+      stoEst[k] = o2 + hb > 0 ? o2 / (o2 + hb) : 0;
+    }
+    pNorm = [0, 1, 2, 3].map(c => pct(tissue.map(k => est[k * 4 + c]), 0.95) || 1);
+    const tHbN = pct(tissue.map(k => est[k * 4] + est[k * 4 + 1]), 0.9) || 1;
+
+    // StO2 map: cool-warm hue, weighted by total hemoglobin
+    const CM = [[0, 30, 50, 170], [0.35, 120, 60, 200], [0.7, 240, 60, 70], [1, 255, 190, 90]];
+    const cw = t => { let i = 0; while (i < CM.length - 2 && t > CM[i + 1][0]) i++;
+      const [a, ...c0] = CM[i], [b, ...c1] = CM[i + 1], f = (t - a) / (b - a); return c0.map((v, q) => lerp(v, c1[q], f)); };
+    stoRGB = new Uint8ClampedArray(NP * 3);
+    for (let k = 0; k < NP; k++) {
+      if (!cls[k]) continue;
+      const grey = (colRGB[k * 3] + colRGB[k * 3 + 1] + colRGB[k * 3 + 2]) / 3 * 0.32;
+      const w = cls[k] === 5 ? 0 : Math.min(1, 0.35 + 0.65 * (est[k * 4] + est[k * 4 + 1]) / tHbN);
+      const c = cw(Math.min(1, Math.max(0, (stoEst[k] - 0.4) / 0.6)));
+      const sh = Math.min(1.15, 0.55 + 0.5 * shade[k]);
+      for (let q = 0; q < 3; q++) stoRGB[k * 3 + q] = lerp(grey, c[q] * sh, w);
+    }
+
+    // reference spectra
+    refCortex = new Float32Array(NB); refTumor = new Float32Array(NB);
+    let nc = 0, nt = 0;
+    for (let k = 0; k < NP; k++) {
+      if (vp[k] > 0.05) continue;
+      if (cls[k] === 1 && sul[k] < 0.2) { nc++; for (let b = 0; b < NB; b++) refCortex[b] += cube[k * NB + b]; }
+      else if (cls[k] === 2 && tum[k] > 0.9) { nt++; for (let b = 0; b < NB; b++) refTumor[b] += cube[k * NB + b]; }
+    }
+    for (let b = 0; b < NB; b++) { refCortex[b] /= Math.max(1, nc); refTumor[b] /= Math.max(1, nt); }
+    YMAX = Math.ceil(Math.max(...refCortex, ...refTumor) * 1.25 * 10) / 10;
+
+    built = true;
+  }
+
+  // ---------- rendering ----------
+  const off = document.createElement('canvas'); off.width = off.height = G;
+  const octx = off.getContext('2d'), img = octx.createImageData(G, G), D = img.data;
+  const bufA = new Uint8ClampedArray(NP * 3), bufB = new Uint8ClampedArray(NP * 3);
+
+  function fillView(v, lam, out) {
+    if (v === 'color') { out.set(colRGB); return; }
+    if (v === 'sto2') { out.set(stoRGB); return; }
+    const bi = (lam - 450) / 10, b0 = Math.min(NB - 2, Math.floor(bi)), f = bi - b0;
+    const n0 = 0.88 * (1 - f) / bandNorm[b0], n1 = 0.88 * f / bandNorm[b0 + 1];
+    const t = lamRGB(lam), tr = 0.5 + 0.5 * t[0], tg = 0.5 + 0.5 * t[1], tb = 0.5 + 0.5 * t[2];
+    for (let k = 0; k < NP; k++) {
+      if (!cls[k]) continue;
+      const o = k * NB;
+      const g = toS((cube[o + b0] * n0 + cube[o + b0 + 1] * n1) * shade[k] * 1.1 + spec[k]);
+      out[k * 3] = g * tr; out[k * 3 + 1] = g * tg; out[k * 3 + 2] = g * tb;
+    }
+  }
+  function compose(va, vb, mix, lam) {
+    fillView(va, lam, bufA);
+    if (mix > 0) fillView(vb, lam, bufB);
+    for (let k = 0; k < NP; k++) {
+      const p = k * 4, q = k * 3;
+      if (!cls[k]) { D[p + 3] = 0; continue; }
+      if (mix > 0) {
+        D[p] = lerp(bufA[q], bufB[q], mix); D[p + 1] = lerp(bufA[q + 1], bufB[q + 1], mix); D[p + 2] = lerp(bufA[q + 2], bufB[q + 2], mix);
+      } else { D[p] = bufA[q]; D[p + 1] = bufA[q + 1]; D[p + 2] = bufA[q + 2]; }
+      D[p + 3] = alpha[k] * 255;
+    }
+    octx.putImageData(img, 0, 0);
+  }
+
+  let dpr = 1;
+  function sizeCanvases() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = stage.clientWidth;
+    fig.width = fig.height = Math.round(w * dpr);
+    spc.width = Math.round(spc.clientWidth * dpr); spc.height = Math.round(spc.clientHeight * dpr);
+  }
+
+  function drawFig(probe) {
+    fctx.clearRect(0, 0, fig.width, fig.height);
+    fctx.imageSmoothingEnabled = true; fctx.imageSmoothingQuality = 'high';
+    fctx.drawImage(off, 0, 0, fig.width, fig.height);
+    const sc = fig.width / G, X = (probe.x + 0.5) * sc, Y = (probe.y + 0.5) * sc, d = dpr;
+    fctx.strokeStyle = 'rgba(255,255,255,.9)'; fctx.lineWidth = 1.2 * d;
+    fctx.beginPath(); fctx.arc(X, Y, 7 * d, 0, Math.PI * 2); fctx.stroke();
+    fctx.beginPath();
+    for (const [ax, ay] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { fctx.moveTo(X + ax * 11 * d, Y + ay * 11 * d); fctx.lineTo(X + ax * 20 * d, Y + ay * 20 * d); }
+    fctx.stroke();
+  }
+
+  function drawSpec(probeK, lam, showMarker) {
+    const W = spc.width, H = spc.height, d = dpr;
+    const L = 30 * d, Rm = 6 * d, T = 22 * d, B = 30 * d, pw = W - L - Rm, ph = H - T - B;
+    const X = l => L + (l - 450) / 500 * pw, Y = r => T + (1 - r / YMAX) * ph;
+    sctx.clearRect(0, 0, W, H);
+    sctx.font = `400 ${9.5 * d}px "JetBrains Mono", monospace`;
+    sctx.textBaseline = 'middle';
+    for (let r = 0; r <= YMAX + 1e-6; r += 0.2) {
+      sctx.strokeStyle = r === 0 ? '#2a2a2e' : '#18181b'; sctx.lineWidth = d;
+      sctx.beginPath(); sctx.moveTo(L, Y(r)); sctx.lineTo(L + pw, Y(r)); sctx.stroke();
+      sctx.fillStyle = '#6f6e6c'; sctx.textAlign = 'right'; sctx.fillText(r.toFixed(1), L - 6 * d, Y(r));
+    }
+    for (let x = 0; x < pw; x += d) {
+      const c = lamRGB(450 + x / pw * 500);
+      sctx.fillStyle = `rgb(${c[0] * 255 | 0},${c[1] * 255 | 0},${c[2] * 255 | 0})`;
+      sctx.fillRect(L + x, H - B + 6 * d, d + 0.5, 3 * d);
+    }
+    sctx.fillStyle = '#6f6e6c'; sctx.textAlign = 'center';
+    for (let l = 500; l <= 900; l += 100) sctx.fillText(l, X(l), H - B + 20 * d);
+    sctx.textAlign = 'right'; sctx.fillText('nm', L + pw, H - B + 20 * d);
+    const curve = (arr, off) => { sctx.beginPath(); for (let b = 0; b < NB; b++) { const x = X(LAM[b]), y = Y(arr[off + b]); b ? sctx.lineTo(x, y) : sctx.moveTo(x, y); } sctx.stroke(); };
+    sctx.lineWidth = 1.2 * d; sctx.setLineDash([3 * d, 4 * d]);
+    sctx.strokeStyle = 'rgba(210,206,198,.45)'; curve(refCortex, 0);
+    sctx.strokeStyle = 'rgba(255,179,107,.6)'; curve(refTumor, 0);
+    sctx.setLineDash([]);
+    if (probeK >= 0) {
+      const gr = sctx.createLinearGradient(L, 0, L + pw, 0);
+      for (let i = 0; i <= 10; i++) { const c = lamRGB(450 + i * 50); gr.addColorStop(i / 10, `rgb(${c[0] * 255 | 0},${c[1] * 255 | 0},${c[2] * 255 | 0})`); }
+      sctx.strokeStyle = gr; sctx.lineWidth = 2 * d; curve(cube, probeK * NB);
+    }
+    // legend
+    sctx.textAlign = 'left'; sctx.textBaseline = 'middle';
+    const ly = 8 * d; let lx = L;
+    const item = (label, style, dash) => {
+      sctx.strokeStyle = style; sctx.lineWidth = (dash ? 1.2 : 2) * d; sctx.setLineDash(dash ? [3 * d, 3 * d] : []);
+      sctx.beginPath(); sctx.moveTo(lx, ly); sctx.lineTo(lx + 16 * d, ly); sctx.stroke(); sctx.setLineDash([]);
+      sctx.fillStyle = '#8b8a88'; sctx.fillText(label, lx + 21 * d, ly); lx += sctx.measureText(label).width + 36 * d;
+    };
+    item('probe', '#e9e4da', false); item('cortex mean', 'rgba(210,206,198,.6)', true); item('tumor mean', 'rgba(255,179,107,.8)', true);
+    if (showMarker) {
+      const x = X(lam);
+      sctx.strokeStyle = 'rgba(255,255,255,.55)'; sctx.lineWidth = d;
+      sctx.beginPath(); sctx.moveTo(x, T); sctx.lineTo(x, H - B); sctx.stroke();
+      if (probeK >= 0) {
+        const bi = (lam - 450) / 10, b0 = Math.min(NB - 2, Math.floor(bi)), f = bi - b0;
+        const r = cube[probeK * NB + b0] * (1 - f) + cube[probeK * NB + b0 + 1] * f;
+        sctx.fillStyle = '#fff'; sctx.beginPath(); sctx.arc(x, Y(r), 3 * d, 0, Math.PI * 2); sctx.fill();
+      }
+    }
+  }
+
+  function updateReadout(probe) {
+    const k = (probe.y | 0) * G + (probe.x | 0), c = cls[k];
+    if (!c) { tagP.textContent = ''; return -1; }
+    tagP.textContent = `x ${String(probe.x | 0).padStart(3, '0')} · y ${String(probe.y | 0).padStart(3, '0')} · ${NAMES[c]}`;
+    const keys = ['o2', 'hb', 'w', 'l'];
+    for (let q = 0; q < 4; q++) if (bars[keys[q]]) bars[keys[q]].style.width = Math.min(100, 100 * est[k * 4 + q] / pNorm[q] / 1.25).toFixed(1) + '%';
+    stoOut.textContent = 'Unmixed concentrations';
+    return k;
+  }
+
+  // ---------- state & loop ----------
+  let mode = reduce ? 'color' : 'auto', lamManual = 560, mouse = null, tAuto = 0, visible = false, running = false, last = 0, frame = 0, dragging = false;
+  const setPressed = v => tabs.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
+  setPressed(mode);
+
+  function autoState(t) {
+    const u = t % 17;
+    if (u < 2.5) return ['color', null, 0, 450];
+    if (u < 3.2) return ['color', 'band', ease((u - 2.5) / 0.7), 450];
+    if (u < 11.2) return ['band', null, 0, 450 + 500 * ease((u - 3.2) / 8)];
+    if (u < 11.9) return ['band', 'sto2', ease((u - 11.2) / 0.7), 950];
+    if (u < 16.3) return ['sto2', null, 0, 950];
+    return ['sto2', 'color', ease((u - 16.3) / 0.7), 450];
+  }
+  const LABEL = { color: 'TRUE COLOR · RGB FROM CUBE', sto2: 'UNMIXED · StO₂', band: '' };
+
+  function render() {
+    if (!built) return;
+    const [va, vb, mix, lam] = mode === 'auto' ? autoState(tAuto) : [mode, null, 0, lamManual];
+    const lamR = Math.round(lam);
+    compose(va, vb, mix, lam);
+    const t = tAuto;
+    const probe = mouse || { x: G * (0.5 + 0.27 * Math.sin(t * 0.23)), y: G * (0.5 + 0.25 * Math.sin(t * 0.37 + 0.8)) };
+    drawFig(probe);
+    const dom = mix > 0.5 ? vb : va;
+    tagV.textContent = dom === 'band' ? `BAND · λ = ${lamR} nm` : LABEL[dom];
+    legend.style.opacity = (va === 'sto2' ? 1 - mix : 0) + (vb === 'sto2' ? mix : 0);
+    const showMarker = va === 'band' || vb === 'band';
+    if (mode === 'auto' && !dragging) { slider.value = lamR; lamV.textContent = `${lamR} nm`; }
+    const k = (frame++ % 3 === 0 || reduce || mouse) ? updateReadout(probe) : ((probe.y | 0) * G + (probe.x | 0));
+    drawSpec(cls[k] ? k : -1, lam, showMarker);
+  }
+
+  function tick(now) {
+    if (!visible) { running = false; return; }
+    const dt = Math.min(100, now - last) / 1000; last = now;
+    tAuto += dt;
+    render();
+    requestAnimationFrame(tick);
+  }
+  function start() {
+    if (reduce) { render(); return; }
+    if (running) return;
+    running = true; last = performance.now(); requestAnimationFrame(tick);
+  }
+
+  new IntersectionObserver(es => {
+    visible = es[0].isIntersecting;
+    if (visible && built) start();
+  }, { rootMargin: '300px 0px' }).observe(sec);
+
+  // build in small chunks once the page is idle, so scrolling never stalls
+  const kick = () => {
+    if (built || building) return;
+    building = true;
+    build().then(() => { sizeCanvases(); if (visible) start(); });
+  };
+  new IntersectionObserver(es => { if (es[0].isIntersecting) kick(); }, { rootMargin: '1500px 0px' }).observe(sec);
+  if ('requestIdleCallback' in window) requestIdleCallback(kick, { timeout: 4000 });
+  else setTimeout(kick, 2500);
+
+  stage.addEventListener('pointermove', e => {
+    const r = fig.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width * G, y = (e.clientY - r.top) / r.height * G;
+    const k = (y | 0) * G + (x | 0);
+    mouse = built && x >= 0 && y >= 0 && x < G && y < G && cls[k] ? { x, y } : null;
+    if (reduce) render();
+  });
+  stage.addEventListener('pointerleave', () => { mouse = null; if (reduce) render(); });
+  tabs.forEach(b => b.addEventListener('click', () => {
+    mode = b.dataset.view;
+    if (mode === 'band') lamManual = +slider.value;
+    setPressed(mode);
+    if (reduce) render();
+  }));
+  slider.addEventListener('input', () => {
+    lamManual = +slider.value; lamV.textContent = `${lamManual} nm`;
+    if (mode !== 'band') { mode = 'band'; setPressed('band'); }
+    if (reduce) render();
+  });
+  slider.addEventListener('pointerdown', () => { dragging = true; });
+  addEventListener('pointerup', () => { dragging = false; });
+  let rt;
+  addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (built) { sizeCanvases(); render(); } }, 150); });
+})();
+</script>
+
+</body>
+</html>
