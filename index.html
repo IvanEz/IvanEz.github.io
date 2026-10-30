@@ -236,7 +236,24 @@
     .teach li { margin-bottom: 16px; }
     .teach .when { float: right; font: 500 14px/1.65 Inter, system-ui, sans-serif; color: var(--muted); }
     .teach .desc { display: block; color: var(--muted); font-size: 15px; }
-    h3.sub { font-size: 14px; color: var(--muted); margin: 28px 0 12px; }
+    .subsec {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 0 28px;
+      padding: 0 0 18px;
+    }
+    .subsec:first-of-type { padding-top: 4px; }
+    h3.sub {
+      margin: 0;
+      padding-top: 6px;
+      font: 500 11px/1.5 "JetBrains Mono", monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .subsec .teach,
+    .subsec .stats-inline { margin: 0; }
+    .subsec .teach li:last-child { margin-bottom: 0; }
     .stats-inline {
       margin: 0 0 12px; color: var(--muted);
       font: 500 14px/1.7 "JetBrains Mono", monospace; letter-spacing: .01em;
@@ -338,6 +355,7 @@
       body { font-size: 16px; }
       .about { flex-direction: column; gap: 14px; }
       .about img { width: 80px; height: 80px; }
+      .subsec { grid-template-columns: 1fr; gap: 10px; }
       .pub-item { grid-template-columns: 1fr; gap: 10px; }
       .pub-thumb { width: 170px; height: 220px; }
       .pub-thumb.landscape { width: 100%; max-width: 360px; height: auto; }
@@ -637,55 +655,60 @@
   <section id="teaching">
     <h2>Teaching &amp; Mentoring</h2>
 
-    <h3 class="sub">Teaching</h3>
-    <ul class="teach">
-      <li>
-        <span class="when">TU Munich, since 2022</span>
-        <strong>AI in Medicine I &amp; II</strong>
-        <span class="desc">Lectured and coordinated the course with practical projects focusing on medical AI for cohorts of 150+ graduate students.</span>
-      </li>
-      <li>
-        <span class="when">TU Munich, 2018–2020</span>
-        <strong>Informatics I for Engineering</strong>
-        <span class="desc">Coordinated tutorial sessions for 200+ undergraduate students.</span>
-      </li>
-    </ul>
-    
-    <br>
-    <h3 class="sub">Student supervision</h3>
-    <p class="stats-inline"><span class="mono">4</span> PhD (co-supervised) · <span class="mono">15</span> MSc · <span class="mono">9</span> BSc</p>
+    <div class="subsec">
+      <h3 class="sub">Teaching</h3>
+      <ul class="teach">
+        <li>
+          <span class="when">TU Munich, since 2022</span>
+          <strong>AI in Medicine I &amp; II</strong>
+          <span class="desc">Lectured and coordinated the course with practical projects focusing on medical AI for cohorts of 150+ graduate students.</span>
+        </li>
+        <li>
+          <span class="when">TU Munich, 2018–2020</span>
+          <strong>Informatics I for Engineering</strong>
+          <span class="desc">Coordinated tutorial sessions for 200+ undergraduate students.</span>
+        </li>
+      </ul>
+    </div>
 
-    <br>
-    <h3 class="sub">Professional service</h3>
-    <ul class="teach">
-      <li>
-        <strong>Journal reviewer</strong>
-        <span class="desc">IEEE Transactions on Medical Imaging (TMI), Medical Image Analysis (MedIA)</span>
-      </li>
-      <li>
-        <strong>Conference reviewer</strong>
-        <span class="desc">MICCAI, MIDL, WACV</span>
-      </li>
-      <li>
-        <strong>Grant reviewer</strong>
-        <span class="desc">Croucher Foundation</span>
-      </li>
-    </ul>
+    <div class="subsec">
+      <h3 class="sub">Student supervision</h3>
+      <p class="stats-inline"><span class="mono">4</span> PhD (co-supervised) · <span class="mono">15</span> MSc · <span class="mono">9</span> BSc</p>
+    </div>
 
-    <br>
-    <h3 class="sub">Outreach</h3>
-    <ul class="teach">
-      <li>
-        <span class="when">Since 2026</span>
-        <strong>Responsible and Applied AI Center, Kenya</strong>
-        <span class="desc">Designed the structure and curriculum of the center.</span>
-      </li>
-      <li>
-        <span class="when">Since 2022</span>
-        <strong>Computer classes in Nepal and Kenya</strong>
-        <span class="desc">Built computer classrooms in remote schools.</span>
-      </li>
-    </ul>
+    <div class="subsec">
+      <h3 class="sub">Professional service</h3>
+      <ul class="teach">
+        <li>
+          <strong>Journal reviewer</strong>
+          <span class="desc">IEEE Transactions on Medical Imaging (TMI), Medical Image Analysis (MedIA)</span>
+        </li>
+        <li>
+          <strong>Conference reviewer</strong>
+          <span class="desc">MICCAI, MIDL, WACV</span>
+        </li>
+        <li>
+          <strong>Grant reviewer</strong>
+          <span class="desc">Croucher Foundation</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="subsec">
+      <h3 class="sub">Outreach</h3>
+      <ul class="teach">
+        <li>
+          <span class="when">Since 2026</span>
+          <strong>Responsible and Applied AI Center, Kenya</strong>
+          <span class="desc">Designed the structure and curriculum of the center.</span>
+        </li>
+        <li>
+          <span class="when">Since 2022</span>
+          <strong>Computer classes in Nepal and Kenya</strong>
+          <span class="desc">Built computer classrooms in remote schools.</span>
+        </li>
+      </ul>
+    </div>
   </section>
 
   <!-- ================= AWARDS ================= -->
@@ -695,7 +718,7 @@
       <li><strong>2023</strong>: Summa cum laude, PhD thesis, TU Munich</li>
       <li><strong>2021–2022</strong>: Two-time winner (1st place), MICCAI FeTS (Federated Tumor Segmentation) Challenge</li>
       <li><strong>2021</strong>: Winner (1st place), MICCAI VALDO (Vascular Lesions Detection and Segmentation) Challenge</li>
-      <li><strong>2020</strong>: 1st place, MICCAI FeTA (Fetal Brain Tissue Annotation and Segmentation) Benchmark</li>
+      <li><strong>2020</strong>: 1st place in MICCAI FeTA (Fetal Brain Tissue Annotation and Segmentation) Benchmark</li>
       <li><strong>2018–2022</strong>: Marie Skłodowska-Curie PhD fellowship</li>
       <li><strong>2018</strong>: NVIDIA GPU grant (co-applicant)</li>
       <li><strong>2013–2015</strong>: Erasmus Mundus full MSc scholarship (awarded to approximately 2% of applicants)</li>
@@ -708,7 +731,7 @@
   <section id="news">
     <h2>News</h2>
     <ul class="news">
-      <li><time>Jun 2026</time><span>New preprint on <a href="https://arxiv.org/abs/2606.23223">wavelength selection for molecular composition inference from diffuse spectroscopy</a>, led by Kevin Scibilia.</span></li>
+      <li><time>Jun 2026</time><span>New preprint on <a href="https://arxiv.org/abs/2606.23223">wavelength selection for molecular composition inference from diffuse spectroscopy</a> by our MSc student Kevin Scibilia.</span></li>
       <li><time>Apr 2026</time><span>Final defense pitch in Berlin for the BMBF <strong>GO-Bio next</strong> startup grant on rapid tumor biopsy analysis with hyperspectral imaging and ML.</span></li>
       <li><time>2026</time><span><a href="https://proceedings.mlr.press/v315/weidner26a.html">Brain tumor growth inversion via differentiable neural surrogates</a>, with PhD student Jonas Weidner, at <em>MIDL 2026</em>.</span></li>
       <li><time>2026</time><span><a href="https://arxiv.org/abs/2509.13360"><em>PREDICT-GBM</em></a>, a multi-center platform for personalized glioblastoma radiotherapy planning, published in <em>npj Digital Medicine</em>.</span></li>
